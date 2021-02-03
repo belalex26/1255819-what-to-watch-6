@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александра Белова](https://up.htmlacademy.ru/react/6/user/1255819).
-* Наставник: `Неизвестно`.
+* Наставник: [Богдан Волик](https://github.com/kultism).
 
 ---
 
