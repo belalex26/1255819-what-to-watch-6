@@ -6,10 +6,10 @@ const App = ({title, genre, year, filmsCard}) => {
 
   return (
     <MainScreen
-    title = {title}
-    genre = {genre}
-    year = {year}
-    filmsCard = {filmsCard}
+      title = {title}
+      genre = {genre}
+      year = {year}
+      filmsCard = {filmsCard}
     />
   );
 };
