@@ -1,39 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import shapeOfFilm from '../../utils/shape-of-film';
 import MainScreen from '../main-screen/main-screen';
 import SingInScreen from '../sing-in-screen/sing-in-screen';
 import MyListScreen from '../my-list-screen/my-list-screen';
-import FilmScreen from '../film-screen/film-screen';
+import FilmScreen from '../film/film-screen';
 import AddReview from '../add-review/add-review';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import MoreLikeThis from '../film/more-like-this';
 
-const App = ({title, genre, year, filmsCard}) => {
+const App = (props) => {
 
   return (
 
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <MainScreen
-            title = {title}
-            genre = {genre}
-            year = {year}
-            filmsCard = {filmsCard}
-          />
+        <Route exact path="/" >
+          <MainScreen films={props.films} />
         </Route>
-        <Route exact path="/login">
+        <Route exact path="/login" >
           <SingInScreen />
         </Route>
-        <Route exact path="/mylist">
-          <MyListScreen />
+        <Route exact path="/mylist" >
+          <MyListScreen films={props.films} />
         </Route>
         <Route exact path="films/:id">
-          <FilmScreen />
+          <FilmScreen films={props.films} />
+          <MoreLikeThis />
         </Route>
         <Route exact path="/films/:id/review">
-          <AddReview />
+          <AddReview films={props.films} />
         </Route>
         <Route exact path="/player/:id">
           <Player />
@@ -47,11 +45,8 @@ const App = ({title, genre, year, filmsCard}) => {
   );
 };
 
-App.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  filmsCard: PropTypes.array.isRequired
-};
+App.propTypes = PropTypes.arrayOf(
+    shapeOfFilm()
+).isRequired;
 
 export default App;

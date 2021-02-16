@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FilmCard from '../film-card/film-card';
+import shapeOfFilm from '../../utils/shape-of-film';
+import MovieList from '../movie-list/movie-list';
 
-const MainScreen = ({title, genre, year, filmsCard}) => {
+
+const MainScreen = (props) => {
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -35,10 +37,10 @@ const MainScreen = ({title, genre, year, filmsCard}) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
+                <span className="movie-card__genre">Drama</span>
+                <span className="movie-card__year">2014</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -97,11 +99,8 @@ const MainScreen = ({title, genre, year, filmsCard}) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {
-              filmsCard.map((item, i) => <FilmCard key = {item + i} title={item}/>)
-            }
-          </div>
+          <MovieList films={props.films}/>
+
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -125,11 +124,8 @@ const MainScreen = ({title, genre, year, filmsCard}) => {
   );
 };
 
-MainScreen.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  filmsCard: PropTypes.array.isRequired
-};
+MainScreen.propTypes = PropTypes.arrayOf(
+    shapeOfFilm()
+).isRequired;
 
 export default MainScreen;
