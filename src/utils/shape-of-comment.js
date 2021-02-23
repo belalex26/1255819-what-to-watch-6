@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 const shapeOfComment = () => {
   return PropTypes.shape(
       {
