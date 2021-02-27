@@ -1,8 +1,8 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shapeOfFilm from '../../utils/shape-of-film';
-import {Link} from 'react-router-dom';
+
+import shapeOfFilm from '../../proptypes/shape-of-film';
 import CommentForm from './comment-form';
 
 const AddReview = (props) => {

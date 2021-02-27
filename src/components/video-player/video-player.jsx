@@ -1,7 +1,8 @@
 import React, {Fragment, useEffect, useRef} from 'react';
-import videoPlayerShape from '../../utils/shape-of-video-player';
+import videoPlayerShape from '../../proptypes/shape-of-video-player';
 
-const VideoPlayer = ({isPlaying, src, posterImage, width, height, alt}) => {
+const VideoPlayer = (props) => {
+  const {isPlaying, src, posterImage, width, height, alt} = props;
   const videoRef = useRef();
 
   useEffect(() => {

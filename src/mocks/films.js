@@ -1,7 +1,7 @@
 const mockFilms = () => [
   {
     "name": `Dardjeeling Limited`,
-    "poster_image": `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/Dardjeeling_Limited.jpg`,
+    "posterImage": `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/Dardjeeling_Limited.jpg`,
     "preview_image": `https://assets.htmlacademy.ru/intensives/javascript-3/film/preview/dardjeeling_limited.jpg`,
     "background_image": `https://assets.htmlacademy.ru/intensives/javascript-3/film/background/Dardjeeling_Limited.jpg`,
     "background_color": `#AD9F8B`,

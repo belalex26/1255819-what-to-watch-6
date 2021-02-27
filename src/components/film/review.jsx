@@ -1,6 +1,7 @@
 import React from 'react';
-import shapeOfComment from '../../utils/shape-of-comment';
-import getMonthAsString from '../../utils/get-month-as-string';
+
+import shapeOfComment from '../../proptypes/shape-of-comment';
+import getMonthAsString from '../../proptypes/get-month-as-string';
 
 const Review = (props) => {
   const date = props.comment.date.split(`T`)[0].split(`-`);

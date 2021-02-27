@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shapeOfFilm from '../../utils/shape-of-film';
-import {Link} from 'react-router-dom';
+
+import shapeOfFilm from '../../proptypes/shape-of-film';
 import FilmOverView from './film-over-view';
 import FilmDetails from './film-details';
 import FilmReviews from './film-reviews';
