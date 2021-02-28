@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 const shapeOfFilm = () => {
   return PropTypes.shape({
     "name": PropTypes.string.isRequired,

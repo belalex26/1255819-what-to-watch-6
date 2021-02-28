@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import shapeOfFilm from '../../utils/shape-of-film';
+
+import shapeOfFilm from '../../proptypes/shape-of-film';
 import MovieList from '../movie-list/movie-list';
 
 

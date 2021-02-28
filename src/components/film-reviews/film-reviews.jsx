@@ -1,7 +1,7 @@
 import React from 'react';
-import Review from './Review';
+import Review from '../review/review';
 import PropTypes from 'prop-types';
-import shapeOfComment from '../../utils/shape-of-comment';
+import shapeOfComment from '../../proptypes/shape-of-comment';
 
 
 const FilmReviews = ({comments}) => {

@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+
 import FilmCard from '../film-card/film-card';
 
 const MovieList = (props) => {
   const [activeFilmState, setActiveFilmState] = useState(0);
-  const handleOnMouseOver = (evt) => {
-    setActiveFilmState(evt.target.dataset.id);
+  const handleOnMouseOver = (film) => {
+    setActiveFilmState({...activeFilmState, id: film.id});
   };
 
   return (
@@ -15,7 +16,9 @@ const MovieList = (props) => {
           return <FilmCard
             name={film.name}
             id={film.id}
-            preview_image={film.preview_image}
+            previewImage={film.previewImage}
+            previewVideoLink={film.previewVideoLink}
+            posterImage={film.posterImage}
             key={film.name + film.id}
             onMouseOver={handleOnMouseOver}/>;
         })
@@ -28,7 +31,7 @@ MovieList.propTypes = {
   films: PropTypes.arrayOf(
       PropTypes.shape({
         "name": PropTypes.string.isRequired,
-        "preview_image": PropTypes.string.isRequired,
+        "previewImage": PropTypes.string.isRequired,
         "id": PropTypes.number.isRequired
       })
   ).isRequired

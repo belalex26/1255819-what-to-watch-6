@@ -1,8 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+
 import MovieList from '../movie-list/movie-list';
 import PropTypes from 'prop-types';
-import shapeOfFilm from '../../utils/shape-of-film';
+import shapeOfFilm from '../../proptypes/shape-of-film';
 
 const MyListScreen = (props) => {
   return (
