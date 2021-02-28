@@ -3,9 +3,9 @@ import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
-import FilmOverView from './film-over-view';
-import FilmDetails from './film-details';
-import FilmReviews from './film-reviews';
+import FilmOverView from '../film-over-view/film-over-view';
+import FilmDetails from '../film-details/film-details';
+import FilmReviews from '../film-reviews/film-reviews';
 import {getComments} from '../../mocks/comments';
 
 const FilmScreen = (props) => {

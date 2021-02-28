@@ -3,7 +3,7 @@ import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
-import CommentForm from './comment-form';
+import CommentForm from '../comment-form/comment-form';
 
 const AddReview = (props) => {
   const {id} = useParams();

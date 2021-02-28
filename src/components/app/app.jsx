@@ -6,11 +6,11 @@ import shapeOfFilm from '../../proptypes/shape-of-film';
 import MainScreen from '../main-screen/main-screen';
 import SingInScreen from '../sing-in-screen/sing-in-screen';
 import MyListScreen from '../my-list-screen/my-list-screen';
-import FilmScreen from '../film/film-screen';
+import FilmScreen from '../film-screen/film-screen';
 import AddReview from '../add-review/add-review';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import MoreLikeThis from '../film/more-like-this';
+import MoreLikeThis from '../more-like-this/more-like-this';
 
 const App = (props) => {
 
