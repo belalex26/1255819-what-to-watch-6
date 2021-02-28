@@ -5,9 +5,11 @@ import {Link} from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 
 const FilmCard = (props) => {
-  const {onMouseOver} = props;
+  const {name, id, posterImage, previewVideoLink, onMouseOver} = props;
 
   const TIMEOUT = 1000;
+  const WIDTH = 280;
+  const HEIGHT = 175;
 
   const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
   const [playbackTimer, setPlaybackTimer] = useState(null);
@@ -18,33 +20,33 @@ const FilmCard = (props) => {
   };
 
   const handleMouseLeave = () => {
-    onMouseOver(null);
+    onMouseOver({id: null});
     clearTimeout(playbackTimer);
     setIsPreviewPlaying(false);
   };
 
   return <article className="small-movie-card catalog__movies-card">
-    <div className="small-movie-card__image" data-id={props.id} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
+    <div className="small-movie-card__image" data-id={id} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
       <VideoPlayer
         isPlaying={isPreviewPlaying}
-        src={props.preview_video_link}
-        posterImage={props.preview_image}
-        width={280}
-        height={175}
-        alt={props.name}>
+        src={previewVideoLink}
+        posterImage={posterImage}
+        width={WIDTH}
+        height={HEIGHT}
+        alt={name}>
       </VideoPlayer>
 
     </div>
     <h3 className="small-movie-card__title">
-      <Link className="small-movie-card__link" to={`/films/${props.id}`}>{props.name}</Link>
+      <Link className="small-movie-card__link" to={`/films/${id}`}>{name}</Link>
     </h3>
   </article>;
 };
 
 FilmCard.propTypes = {
   "name": PropTypes.string.isRequired,
-  "preview_image": PropTypes.string.isRequired,
-  "preview_video_link": PropTypes.string.isRequired,
+  "posterImage": PropTypes.string.isRequired,
+  "previewVideoLink": PropTypes.string.isRequired,
   "id": PropTypes.number.isRequired,
   "onMouseOver": PropTypes.func
 };

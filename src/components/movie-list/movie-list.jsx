@@ -16,7 +16,9 @@ const MovieList = (props) => {
           return <FilmCard
             name={film.name}
             id={film.id}
-            preview_image={film.preview_image}
+            previewImage={film.previewImage}
+            previewVideoLink={film.previewVideoLink}
+            posterImage={film.posterImage}
             key={film.name + film.id}
             onMouseOver={handleOnMouseOver}/>;
         })
@@ -29,7 +31,7 @@ MovieList.propTypes = {
   films: PropTypes.arrayOf(
       PropTypes.shape({
         "name": PropTypes.string.isRequired,
-        "preview_image": PropTypes.string.isRequired,
+        "previewImage": PropTypes.string.isRequired,
         "id": PropTypes.number.isRequired
       })
   ).isRequired

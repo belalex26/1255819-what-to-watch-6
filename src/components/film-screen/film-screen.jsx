@@ -6,7 +6,7 @@ import shapeOfFilm from '../../proptypes/shape-of-film';
 import FilmOverView from '../film-over-view/film-over-view';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
-import {getComments} from '../../mocks/comments';
+import comments from '../../mocks/comments';
 
 const FilmScreen = (props) => {
   const [state, setState] = useState(`Overview`);
@@ -20,7 +20,7 @@ const FilmScreen = (props) => {
         return <FilmDetails movie={movie} />;
       }
       case `Reviews`: {
-        return <FilmReviews comments = {getComments(movie.id)} />;
+        return <FilmReviews comments = {comments} />;
       }
       default: {
         return <FilmOverView movie={movie} />;
