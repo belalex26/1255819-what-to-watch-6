@@ -20,7 +20,7 @@ const FilmScreen = (props) => {
         return <FilmDetails movie={movie} />;
       }
       case `Reviews`: {
-        return <FilmReviews comments = {comments} />;
+        return <FilmReviews comments={comments} />;
       }
       default: {
         return <FilmOverView movie={movie} />;
@@ -32,7 +32,7 @@ const FilmScreen = (props) => {
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
         <div className="movie-card__bg">
-          <img src={movie.background_image} alt={movie.name} />
+          <img src={movie.backgroundImage} alt={movie.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header movie-card__head">
@@ -77,7 +77,7 @@ const FilmScreen = (props) => {
       <div className="movie-card__wrap movie-card__translate-top">
         <div className="movie-card__info">
           <div className="movie-card__poster movie-card__poster--big">
-            <img src={movie.poster_image} alt={movie.name} width={218} height={327} />
+            <img src={movie.posterImage} alt={movie.name} width={218} height={327} />
           </div>
           <div className="movie-card__desc">
             <nav className="movie-nav movie-card__nav">
