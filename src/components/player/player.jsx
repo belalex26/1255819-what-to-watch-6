@@ -7,7 +7,6 @@ import shapeOfFilm from '../../proptypes/shape-of-film';
 const Player = (props) => {
   const {id} = useParams();
   const movie = props.films.find((film) => film.id === +id);
-  const movieTitle = movie.name;
 
   return (
     <div className="player">
@@ -31,7 +30,7 @@ const Player = (props) => {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">{movieTitle}</div>
+          <div className="player__name">{movie.name}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">

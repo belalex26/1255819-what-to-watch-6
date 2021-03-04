@@ -13,36 +13,40 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import MoreLikeThis from '../more-like-this/more-like-this';
 
 const App = (props) => {
-
   return (
-
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" >
-          <MainScreen films={props.films} />
+        <Route path='/' exact>
+          <MainScreen />
         </Route>
-        <Route exact path="/login" >
+
+        <Route path='/login' exact>
           <SingInScreen />
         </Route>
-        <Route exact path="/mylist" >
+
+        <Route path='/mylist' exact>
           <MyListScreen films={props.films} />
         </Route>
-        <Route exact path="films/:id">
+
+        <Route path='/films/:id' exact>
           <FilmScreen films={props.films} />
           <MoreLikeThis />
         </Route>
-        <Route exact path="/films/:id/review">
+
+        <Route path='/films/:id/review' exact>
           <AddReview films={props.films} />
         </Route>
-        <Route exact path="/player/:id">
-          <Player />
+
+        <Route path='/player/:id' exact >
+          <Player films={props.films} />
         </Route>
+
         <Route>
           <NotFoundScreen />
         </Route>
+
       </Switch>
     </BrowserRouter>
-
   );
 };
 
