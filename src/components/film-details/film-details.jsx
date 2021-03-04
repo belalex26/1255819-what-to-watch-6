@@ -10,7 +10,7 @@ const FilmDetails = (props) => {
   const movie = props.films.find((film) => film.id === +id);
 
   const movieDuration = `${Math.floor(movie.runTime / 60)}h ${movie.runTime % 60}m`;
-  
+
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
