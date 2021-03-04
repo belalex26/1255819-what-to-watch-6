@@ -13,32 +13,31 @@ const ShowMoreBtn = (props) => {
     onButtonClick();
   };
 
-    const isHidden = visibleFilmsCount >= allFilms.length;
+  const isHidden = visibleFilmsCount >= allFilms.length;
 
-    return(
-        <button onClick={handleButtonClick} className={`${isHidden ? `visually-hidden` : `catalog__button`}`} type="button">Show more</button>
-    );
-  };
+  return (
+    <button onClick={handleButtonClick} className={`${isHidden ? `visually-hidden` : `catalog__button`}`} type="button">Show more</button>
+  );
+};
 
-  ShowMoreBtn.propTypes = {
-    allFilms: PropTypes.arrayOf(
+ShowMoreBtn.propTypes = {
+  allFilms: PropTypes.arrayOf(
       shapeOfFilm()
   ).isRequired,
-    visibleFilmsCount: PropTypes.number.isRequired,
-    onButtonClick: PropTypes.func.isRequired
-  };
-  
-  
-  const mapStateToProps = (state) => ({
-    allFilms: getAllFilmsByGenre(state),
-    visibleFilmsCount: state.visibleFilmsCount,
-  });
-  
-  const mapDispatchToProps = (dispatch) => ({
-    onButtonClick() {
-      dispatch(ActionCreator.increaseVisibleFilmsCount());
-    },
-  });
-  
-  export {ShowMoreBtn};
-  export default connect(mapStateToProps, mapDispatchToProps)(ShowMoreBtn);
+  visibleFilmsCount: PropTypes.number.isRequired,
+  onButtonClick: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  allFilms: getAllFilmsByGenre(state),
+  visibleFilmsCount: state.visibleFilmsCount,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onButtonClick() {
+    dispatch(ActionCreator.increaseVisibleFilmsCount());
+  },
+});
+
+export {ShowMoreBtn};
+export default connect(mapStateToProps, mapDispatchToProps)(ShowMoreBtn);
