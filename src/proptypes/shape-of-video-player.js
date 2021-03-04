@@ -6,7 +6,7 @@ const videoPlayerShape = () => {
     "height": PropTypes.number.isRequired,
     "isPlaying": PropTypes.bool.isRequired,
     "posterImage": PropTypes.string.isRequired,
-    "preview_video_link": PropTypes.string.isRequired,
+    "previewVideoLink": PropTypes.string.isRequired,
     "src": PropTypes.string.isRequired,
     "width": PropTypes.number.isRequired,
   });
