@@ -64,7 +64,7 @@ const FilmScreen = (props) => {
                   <use xlinkto="#play-s" />
                 </svg>
                 <span>Play</span>
-                </Link>
+              </Link>
               <button className="btn btn--list movie-card__button" type="button">
                 <svg viewBox="0 0 19 20" width={19} height={20}>
                   <use xlinkto="#add" />
