@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
+import shapeOfPromoFilm from '../../proptypes/shape-of-promo-film';
 import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
+import ShowMoreBtn from '../show-more-btn/show-more-btn';
 import {getVisibleFilms} from '../../selectors';
+import {ActionCreator} from '../../store/action';
 
 const MainScreen = (props) => {
-  const {promo, visibleFilms} = props;
+  const {promo, visibleFilms, onLoad} = props;
+
+  useEffect(() => {
+    onLoad();
+  }, []);
 
   return (
     <React.Fragment>
@@ -74,7 +81,7 @@ const MainScreen = (props) => {
           <MovieList visibleFilms={visibleFilms} />
 
           <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+            <ShowMoreBtn />
           </div>
         </section>
 
@@ -96,14 +103,24 @@ const MainScreen = (props) => {
   );
 };
 
-MainScreen.propTypes = PropTypes.arrayOf(
-    shapeOfFilm()
-).isRequired;
+MainScreen.propTypes = {
+  visibleFilms: PropTypes.arrayOf(
+      shapeOfFilm()
+  ).isRequired,
+  promo: shapeOfPromoFilm().isRequired,
+  onLoad: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => ({
   visibleFilms: getVisibleFilms(state),
   promo: state.promo,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoad() {
+    dispatch(ActionCreator.resetVisibleFilmsCount());
+  },
+});
+
 export {MainScreen};
-export default connect(mapStateToProps, null)(MainScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
