@@ -22,7 +22,7 @@ const FilmScreen = (props) => {
         return <FilmDetails films={films} />;
       }
       case `Reviews`: {
-        return <FilmReviews comments = {comments} />;
+        return <FilmReviews comments={comments} />;
       }
       default: {
         return <FilmOverView films={films} />;
@@ -79,6 +79,7 @@ const FilmScreen = (props) => {
       <div className="movie-card__wrap movie-card__translate-top">
         <div className="movie-card__info">
           <div className="movie-card__poster movie-card__poster--big">
+
             <img src={film.posterImage} alt={film.name} width={218} height={327} />
           </div>
           <div className="movie-card__desc">
