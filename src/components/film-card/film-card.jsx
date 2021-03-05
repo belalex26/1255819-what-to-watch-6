@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
@@ -18,6 +18,12 @@ const FilmCard = (props) => {
     onMouseOver(film);
     setPlaybackTimer(setTimeout(() => setIsPreviewPlaying(true), TIMEOUT));
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(playbackTimer);
+    };
+  });
 
   const handleMouseLeave = () => {
     onMouseOver({id: null});

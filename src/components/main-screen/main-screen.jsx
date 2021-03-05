@@ -1,11 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
+import shapeOfPromoFilm from '../../proptypes/shape-of-promo-film';
 import MovieList from '../movie-list/movie-list';
-
+import GenreList from '../genre-list/genre-list';
+import ShowMoreBtn from '../show-more-btn/show-more-btn';
+import {getVisibleFilms} from '../../selectors';
+import {ActionCreator} from '../../store/action';
 
 const MainScreen = (props) => {
+  const {promo, visibleFilms, onLoad} = props;
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -38,10 +49,10 @@ const MainScreen = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{promo.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{promo.genre}</span>
+                <span className="movie-card__year">{promo.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -65,45 +76,12 @@ const MainScreen = (props) => {
 
       <div className="page-content">
         <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
-
-          <MovieList films={props.films}/>
+          <GenreList />
+          <MovieList visibleFilms={visibleFilms} />
 
           <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+            <ShowMoreBtn />
           </div>
         </section>
 
@@ -125,8 +103,24 @@ const MainScreen = (props) => {
   );
 };
 
-MainScreen.propTypes = PropTypes.arrayOf(
-    shapeOfFilm()
-).isRequired;
+MainScreen.propTypes = {
+  visibleFilms: PropTypes.arrayOf(
+      shapeOfFilm()
+  ).isRequired,
+  promo: shapeOfPromoFilm().isRequired,
+  onLoad: PropTypes.func.isRequired
+};
 
-export default MainScreen;
+const mapStateToProps = (state) => ({
+  visibleFilms: getVisibleFilms(state),
+  promo: state.promo,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoad() {
+    dispatch(ActionCreator.resetVisibleFilmsCount());
+  },
+});
+
+export {MainScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

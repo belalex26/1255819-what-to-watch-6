@@ -17,7 +17,7 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact>
-          <MainScreen films={props.films} />
+          <MainScreen />
         </Route>
 
         <Route path='/login' exact>
@@ -44,7 +44,7 @@ const App = (props) => {
         <Route>
           <NotFoundScreen />
         </Route>
-        
+
       </Switch>
     </BrowserRouter>
   );

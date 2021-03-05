@@ -29,7 +29,7 @@ const MyListScreen = (props) => {
 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <MovieList films={props.films}/>
+          <MovieList visibleFilms={props.favouriteFilms}/>
 
         </section>
 

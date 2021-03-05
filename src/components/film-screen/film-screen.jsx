@@ -9,21 +9,23 @@ import FilmReviews from '../film-reviews/film-reviews';
 import comments from '../../mocks/comments';
 
 const FilmScreen = (props) => {
+  const {films} = props;
   const [state, setState] = useState(`Overview`);
   const showActiveClassNameIf = (text) => state === text ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`;
   const handleClick = (evt) => setState(evt.target.innerText);
-  const {id} = useParams();
-  const movie = props.films.find((film) => film.id === +id);
+  const id = parseInt(useParams().id, 10);
+  const film = films.find((currentFilm) => currentFilm.id === id);
+
   const FilmInfo = () => {
     switch (state) {
       case `Details`: {
-        return <FilmDetails movie={movie} />;
+        return <FilmDetails films={films} />;
       }
       case `Reviews`: {
         return <FilmReviews comments={comments} />;
       }
       default: {
-        return <FilmOverView movie={movie} />;
+        return <FilmOverView films={films} />;
       }
     }
   };
@@ -32,7 +34,7 @@ const FilmScreen = (props) => {
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
         <div className="movie-card__bg">
-          <img src={movie.backgroundImage} alt={movie.name} />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header movie-card__head">
@@ -51,18 +53,18 @@ const FilmScreen = (props) => {
         </header>
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{movie.name}</h2>
+            <h2 className="movie-card__title">{film.name}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{movie.genre}</span>
-              <span className="movie-card__year">{movie.released}</span>
+              <span className="movie-card__genre">{film.genre}</span>
+              <span className="movie-card__year">{film.released}</span>
             </p>
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <Link to={`/player/${film.id}`} type="button" className="btn btn--play movie-card__button">
                 <svg viewBox="0 0 19 19" width={19} height={19}>
                   <use xlinkto="#play-s" />
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
               <button className="btn btn--list movie-card__button" type="button">
                 <svg viewBox="0 0 19 20" width={19} height={20}>
                   <use xlinkto="#add" />
@@ -77,7 +79,8 @@ const FilmScreen = (props) => {
       <div className="movie-card__wrap movie-card__translate-top">
         <div className="movie-card__info">
           <div className="movie-card__poster movie-card__poster--big">
-            <img src={movie.posterImage} alt={movie.name} width={218} height={327} />
+
+            <img src={film.posterImage} alt={film.name} width={218} height={327} />
           </div>
           <div className="movie-card__desc">
             <nav className="movie-nav movie-card__nav">
@@ -94,7 +97,7 @@ const FilmScreen = (props) => {
               </ul>
             </nav>
             <div className="movie-rating">
-              <div className="movie-rating__score">{movie.rating}</div>
+              <div className="movie-rating__score">{film.rating}</div>
               <p className="movie-rating__meta">
                 <span className="movie-rating__level">Very good</span>
                 <span className="movie-rating__count">240 ratings</span>
