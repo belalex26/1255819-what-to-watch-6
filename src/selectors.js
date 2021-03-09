@@ -6,10 +6,11 @@ const getFilms = (state) => state.films;
 const getVisibleFilmsCount = (state) => state.visibleFilmsCount;
 
 const getFilmsByGenre = (films, genre) => {
+  console.log(films);
   if (genre === DEFAULT_GENRE) {
     return films;
   }
-  return films.filter((film) => film.genre === genre);
+  return films.map.filter((film) => film.genre === genre);
 };
 
 export const getVisibleFilms = createSelector(

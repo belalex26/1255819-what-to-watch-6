@@ -28,9 +28,9 @@ ShowMoreBtn.propTypes = {
   onButtonClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  allFilms: getAllFilmsByGenre(state),
-  visibleFilmsCount: state.visibleFilmsCount,
+const mapStateToProps = ({FILMS}) => ({
+  allFilms: getAllFilmsByGenre({FILMS}),
+  visibleFilmsCount: FILMS.visibleFilmsCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({

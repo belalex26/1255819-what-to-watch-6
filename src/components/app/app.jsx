@@ -12,7 +12,7 @@ import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import MoreLikeThis from '../more-like-this/more-like-this';
 
-const App = (props) => {
+const App = () => {
   return (
     <BrowserRouter>
       <Switch>
@@ -25,20 +25,20 @@ const App = (props) => {
         </Route>
 
         <Route path='/mylist' exact>
-          <MyListScreen films={props.films} />
+          <MyListScreen />
         </Route>
 
         <Route path='/films/:id' exact>
-          <FilmScreen films={props.films} />
+          <FilmScreen />
           <MoreLikeThis />
         </Route>
 
         <Route path='/films/:id/review' exact>
-          <AddReview films={props.films} />
+          <AddReview />
         </Route>
 
         <Route path='/player/:id' exact >
-          <Player films={props.films} />
+          <Player />
         </Route>
 
         <Route>

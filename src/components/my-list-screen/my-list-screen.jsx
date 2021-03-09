@@ -51,6 +51,7 @@ const MyListScreen = (props) => {
   );
 };
 
+
 MyListScreen.propTypes = PropTypes.arrayOf(
     shapeOfFilm()
 ).isRequired;

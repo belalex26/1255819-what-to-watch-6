@@ -4,24 +4,43 @@ import {connect} from 'react-redux';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
 import shapeOfPromoFilm from '../../proptypes/shape-of-promo-film';
+import LoadingScreen from '../loading-screen/loading-screen';
 import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
 import {getVisibleFilms} from '../../selectors';
 import {ActionCreator} from '../../store/action';
+import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
 
 const MainScreen = (props) => {
-  const {promo, visibleFilms, onLoad} = props;
+  const {promo, films, onLoad, isDataLoaded, onLoadData} = props;
+
+  console.log(props);
 
   useEffect(() => {
     onLoad();
   }, []);
 
+  useEffect(() => {
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  const altImgDesc = `${promo.name} poster`;
+
+
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promo.backgroundImage} alt={promo.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -45,7 +64,7 @@ const MainScreen = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promo.posterImage} alt={altImgDesc} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -78,7 +97,7 @@ const MainScreen = (props) => {
         <section className="catalog">
 
           <GenreList />
-          <MovieList visibleFilms={visibleFilms} />
+          <MovieList visibleFilms={films} />
 
           <div className="catalog__more">
             <ShowMoreBtn />
@@ -104,21 +123,28 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  visibleFilms: PropTypes.arrayOf(
+  films: PropTypes.arrayOf(
       shapeOfFilm()
   ).isRequired,
   promo: shapeOfPromoFilm().isRequired,
-  onLoad: PropTypes.func.isRequired
+  onLoad: PropTypes.func.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
+  onLoadData: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  visibleFilms: getVisibleFilms(state),
-  promo: state.promo,
+const mapStateToProps = ({FILMS}) => ({
+  isDataLoaded: FILMS.isDataLoaded,
+  promo: FILMS.promo,
+  films: getVisibleFilms(FILMS),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad() {
     dispatch(ActionCreator.resetVisibleFilmsCount());
+  },
+  onLoadData() {
+    dispatch(fetchPromoFilm());
+    dispatch(fetchFilmsList());
   },
 });
 

@@ -13,6 +13,7 @@ const getGenreList = (films) => {
 
 const GenresList = (props) => {
   const {films, activeGenre, onGenreClick} = props;
+  console.log(props);
 
   const genres = getGenreList(films);
 
@@ -57,9 +58,9 @@ GenresList.propTypes = {
   onGenreClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  films: state.films,
-  activeGenre: state.activeGenre,
+const mapStateToProps = ({FILMS}) => ({
+  activeGenre: FILMS.activeGenre,
+  films: FILMS.films,
 });
 
 const mapDispatchToProps = (dispatch) => ({
