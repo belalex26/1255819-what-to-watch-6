@@ -15,7 +15,7 @@ import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
 const MainScreen = (props) => {
   const {promo, films, onLoad, isDataLoaded, onLoadData} = props;
 
-  console.log(props);
+  console.log(films);
 
   useEffect(() => {
     onLoad();

@@ -1,17 +1,9 @@
 import {createSelector} from 'reselect';
-import {DEFAULT_GENRE} from './const';
+import {getFilmsByGenre} from './utils';
 
 const getActiveGenre = (state) => state.activeGenre;
 const getFilms = (state) => state.films;
 const getVisibleFilmsCount = (state) => state.visibleFilmsCount;
-
-const getFilmsByGenre = (films, genre) => {
-  console.log(films);
-  if (genre === DEFAULT_GENRE) {
-    return films;
-  }
-  return films.map.filter((film) => film.genre === genre);
-};
 
 export const getVisibleFilms = createSelector(
     [getActiveGenre, getFilms, getVisibleFilmsCount],
