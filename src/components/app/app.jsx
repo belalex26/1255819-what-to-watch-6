@@ -17,7 +17,7 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact>
-          <MainScreen />
+          <MainScreen films={props.films} />
         </Route>
 
         <Route path='/login' exact>
@@ -25,20 +25,20 @@ const App = (props) => {
         </Route>
 
         <Route path='/mylist' exact>
-          <MyListScreen films={props.films} />
+          <MyListScreen />
         </Route>
 
         <Route path='/films/:id' exact>
-          <FilmScreen films={props.films} />
+          <FilmScreen />
           <MoreLikeThis />
         </Route>
 
         <Route path='/films/:id/review' exact>
-          <AddReview films={props.films} />
+          <AddReview />
         </Route>
 
         <Route path='/player/:id' exact >
-          <Player films={props.films} />
+          <Player />
         </Route>
 
         <Route>
