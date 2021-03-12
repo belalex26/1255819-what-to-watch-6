@@ -1,4 +1,4 @@
-const adaptFilmToClient = (film) => {
+export const adaptFilmToClient = (film) => {
   const adaptedFilm = Object.assign(
       {},
       film,
@@ -27,5 +27,3 @@ const adaptFilmToClient = (film) => {
 
   return adaptedFilm;
 };
-
-export {adaptFilmToClient};

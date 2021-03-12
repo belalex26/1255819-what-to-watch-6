@@ -14,7 +14,7 @@ const getGenreList = (films) => {
 
 const GenresList = (props) => {
   const {films, activeGenre, onGenreClick} = props;
- // console.log(props);
+  // console.log(props);
 
   const genres = getGenreList(films);
 
@@ -35,15 +35,15 @@ const GenresList = (props) => {
 
 GenresList.propTypes = {
   films: PropTypes.arrayOf(
-    shapeOfFilm()
-).isRequired,
+      shapeOfFilm()
+  ).isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({FILMS}) => ({
-  activeGenre: FILMS.activeGenre,
-  films: FILMS.films,
+const mapStateToProps = ({movies}) => ({
+  activeGenre: movies.activeGenre,
+  films: movies.films,
 });
 
 const mapDispatchToProps = (dispatch) => ({

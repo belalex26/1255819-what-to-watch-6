@@ -15,8 +15,6 @@ import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
 const MainScreen = (props) => {
   const {promo, films, onLoad, isDataLoaded, onLoadData} = props;
 
-  console.log(films);
-
   useEffect(() => {
     onLoad();
   }, []);
@@ -34,7 +32,6 @@ const MainScreen = (props) => {
   }
 
   const altImgDesc = `${promo.name} poster`;
-
 
   return (
     <React.Fragment>
@@ -132,10 +129,10 @@ MainScreen.propTypes = {
   onLoadData: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({FILMS}) => ({
-  isDataLoaded: FILMS.isDataLoaded,
-  promo: FILMS.promo,
-  films: getVisibleFilms(FILMS),
+const mapStateToProps = ({movies}) => ({
+  isDataLoaded: movies.isDataLoaded,
+  promo: movies.promo,
+  films: getVisibleFilms(movies),
 });
 
 const mapDispatchToProps = (dispatch) => ({

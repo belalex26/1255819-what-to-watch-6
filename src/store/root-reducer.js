@@ -2,8 +2,8 @@ import {combineReducers} from 'redux';
 import {errorReducer, reducer} from './reducer';
 
 export const NameSpace = {
-  FILMS: `FILMS`,
-  ERRORS: `ERRORS`,
+  FILMS: `movies`,
+  ERRORS: `errors`,
 };
 
 export default combineReducers({
