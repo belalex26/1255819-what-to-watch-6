@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
-import shapeOfPromoFilm from '../../proptypes/shape-of-promo-film';
 import LoadingScreen from '../loading-screen/loading-screen';
 import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
 import {getVisibleFilms} from '../../selectors';
 import {ActionCreator} from '../../store/action';
-import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
+import {fetchFilmsList} from '../../store/api-actions';
 
 const MainScreen = (props) => {
-  const {promo, films, onLoad, isDataLoaded, onLoadData} = props;
+  const {films, onLoad, isDataLoaded, onLoadData} = props;
 
   useEffect(() => {
     onLoad();
@@ -31,13 +30,13 @@ const MainScreen = (props) => {
     );
   }
 
-  const altImgDesc = `${promo.name} poster`;
+  const altImgDesc = `${films[0].name} poster`;
 
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={promo.backgroundImage} alt={promo.name} />
+          <img src={films[0].backgroundImage} alt={films[0].name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -61,14 +60,14 @@ const MainScreen = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src={promo.posterImage} alt={altImgDesc} width="218" height="327" />
+              <img src={films[0].posterImage} alt={altImgDesc} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{promo.title}</h2>
+              <h2 className="movie-card__title">{films[0].title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{promo.genre}</span>
-                <span className="movie-card__year">{promo.released}</span>
+                <span className="movie-card__genre">{films[0].genre}</span>
+                <span className="movie-card__year">{films[0].released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -123,7 +122,6 @@ MainScreen.propTypes = {
   films: PropTypes.arrayOf(
       shapeOfFilm()
   ).isRequired,
-  promo: shapeOfPromoFilm().isRequired,
   onLoad: PropTypes.func.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired
@@ -140,7 +138,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.resetVisibleFilmsCount());
   },
   onLoadData() {
-    dispatch(fetchPromoFilm());
     dispatch(fetchFilmsList());
   },
 });

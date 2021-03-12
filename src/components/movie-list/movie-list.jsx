@@ -5,7 +5,6 @@ import FilmCard from '../film-card/film-card';
 
 const MovieList = (props) => {
   const {visibleFilms} = props;
-  console.log(props);
   const [activeFilmState, setActiveFilmState] = useState(0);
   const handleOnMouseOver = (film) => {
     setActiveFilmState({...activeFilmState, id: film.id});
