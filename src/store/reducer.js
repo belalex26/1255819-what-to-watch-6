@@ -3,8 +3,10 @@ import {DEFAULT_GENRE, DEFAULT_VISIBLE_FILMS_COUNT, AuthorizationStatus} from '.
 
 const initialState = {
   activeGenre: DEFAULT_GENRE,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationStatus: AuthorizationStatus.INIT,
   isDataLoaded: false,
+  isFilmLoaded: false,
+  isReviewsLoaded: false,
   films: [],
   promo: {
     backgroundImage: ``,

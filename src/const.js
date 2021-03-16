@@ -5,6 +5,17 @@ const DEFAULT_VISIBLE_FILMS_COUNT = 8;
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+  INIT: `INIT`,
+  AUTH_ERROR: `AUTH_ERROR`
+};
+
+const AppRoute = {
+  ADD_REVIEW: `/films/:id/review`,
+  FILM: `/films/:id`,
+  LOGIN: `/login`,
+  MY_LIST: `/mylist`,
+  PLAYER: `/player/:id`,
+  ROOT: `/`,
 };
 
 const genreList = [
@@ -51,4 +62,4 @@ const genreList = [
 ];
 
 
-export {DEFAULT_GENRE, MAX_GENRES_COUNT, DEFAULT_VISIBLE_FILMS_COUNT, AuthorizationStatus, genreList};
+export {DEFAULT_GENRE, MAX_GENRES_COUNT, DEFAULT_VISIBLE_FILMS_COUNT, AuthorizationStatus, AppRoute, genreList};

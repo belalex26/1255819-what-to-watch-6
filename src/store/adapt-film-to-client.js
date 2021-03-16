@@ -1,13 +1,30 @@
-export const adaptFilmToClient = (films) => {
-  const adaptedFilms = [];
-  films.map((film) => {
-    const newFilm = {};
-    const filmKeys = Object.keys(film);
-    const filmValues = Object.values(film);
-    filmKeys.map((key, index) => {
-      newFilm[key.replace(/_\w/g, (m) => m[1].toUpperCase())] = filmValues[index];
-    });
-    adaptedFilms.push(newFilm);
-  });
-  return adaptedFilms;
+export const adaptFilmToClient = (film) => {
+  const adaptedFilm = Object.assign(
+      {},
+      film,
+      {
+        posterImage: film.poster_image,
+        previewImage: film.preview_image,
+        backgroundImage: film.background_image,
+        backgroundColor: film.background_color,
+        scoresCount: film.scores_count,
+        runTime: film.run_time,
+        isFavorite: film.is_favorite,
+        videoLink: film.video_link,
+        previewVideoLink: film.preview_video_link
+      }
+  );
+
+  delete adaptedFilm.poster_image;
+  delete adaptedFilm.preview_image;
+  delete adaptedFilm.background_image;
+  delete adaptedFilm.background_color;
+  delete adaptedFilm.scores_count;
+  delete adaptedFilm.run_time;
+  delete adaptedFilm.is_favorite;
+  delete adaptedFilm.video_link;
+  delete adaptedFilm.preview_video_link;
+
+  return adaptedFilm;
 };
+

@@ -1,31 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams, Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
+import shapeOfComment from '../../proptypes/shape-of-comment';
 import FilmOverView from '../film-over-view/film-over-view';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
-import comments from '../../mocks/comments';
+import {fetchFilmById, fetchReviewsById} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 const FilmScreen = (props) => {
-  const {films} = props;
+  const {film, comments, isFilmLoaded, isReviewsLoaded, onLoad} = props;
+
   const [state, setState] = useState(`Overview`);
   const showActiveClassNameIf = (text) => state === text ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`;
   const handleClick = (evt) => setState(evt.target.innerText);
   const id = parseInt(useParams().id, 10);
-  const film = films.find((currentFilm) => currentFilm.id === id);
+
+  useEffect(() => {
+    onLoad(id);
+  }, []);
+
+  if (!isFilmLoaded || !isReviewsLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
 
   const FilmInfo = () => {
     switch (state) {
       case `Details`: {
-        return <FilmDetails films={films} />;
+        return <FilmDetails film={film} />;
       }
       case `Reviews`: {
-        return <FilmReviews comments={comments} />;
+        return <FilmReviews comments={comments}/>;
       }
       default: {
-        return <FilmOverView films={films} />;
+        return <FilmOverView film={film} />;
       }
     }
   };
@@ -111,8 +125,28 @@ const FilmScreen = (props) => {
   );
 };
 
-FilmScreen.propTypes = PropTypes.arrayOf(
-    shapeOfFilm()
-).isRequired;
+FilmScreen.propTypes = {
+  film: shapeOfFilm(),
+  comments: shapeOfComment(),
+  onLoad: PropTypes.func.isRequired,
+  isFilmLoaded: PropTypes.bool.isRequired,
+  isReviewsLoaded: PropTypes.bool.isRequired,
+};
 
-export default FilmScreen;
+const mapStateToProps = ({movies}) => ({
+  film: movies.film,
+  comments: movies.comments,
+  isFilmLoaded: movies.isFilmLoaded,
+  isReviewsLoaded: movies.isReviewsLoaded
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoad(id) {
+    dispatch(fetchFilmById(id));
+    dispatch(fetchReviewsById(id));
+  },
+});
+
+export {FilmScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(FilmScreen);

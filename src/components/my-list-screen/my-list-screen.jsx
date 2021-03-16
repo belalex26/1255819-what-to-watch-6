@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import MovieList from '../movie-list/movie-list';
 import shapeOfFilm from '../../proptypes/shape-of-film';
+import {fetchFavoriteFilmsList} from '../../store/api-actions';
 
 const MyListScreen = (props) => {
+  const {favoriteFilms, onLoadData} = props;
+
+  useEffect(() => {
+    onLoadData();
+  }, []);
+
   return (
     <React.Fragment>
       <div className="user-page">
@@ -29,7 +37,7 @@ const MyListScreen = (props) => {
 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <MovieList visibleFilms={props.favouriteFilms}/>
+          <MovieList visibleFilms={favoriteFilms}/>
 
         </section>
 
@@ -51,10 +59,22 @@ const MyListScreen = (props) => {
   );
 };
 
+MyListScreen.propTypes = {
+  favoriteFilms: PropTypes.arrayOf(
+      shapeOfFilm()
+  ).isRequired,
+  onLoadData: PropTypes.func.isRequired,
+};
 
-MyListScreen.propTypes = PropTypes.arrayOf(
-    shapeOfFilm()
-).isRequired;
+const mapStateToProps = ({movies}) => ({
+  favoriteFilms: movies.favoriteFilms,
+});
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData() {
+    dispatch(fetchFavoriteFilmsList());
+  },
+});
 
-export default MyListScreen;
+export {MyListScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(MyListScreen);

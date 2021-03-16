@@ -30,6 +30,18 @@ export const ActionCreator = {
     type: ActionType.FETCH_PROMO_FILM_ERROR,
     payload: error,
   }),
+  fetchFavoriteFilmsListError: (error) => ({
+    type: ActionType.FETCH_FAVORITE_FILMS_LIST_ERROR,
+    payload: error,
+  }),
+  fetchFilmByIdError: (error) => ({
+    type: ActionType.FETCH_FILM_BY_ID_ERROR,
+    payload: error,
+  }),
+  fetchReviewsByIdError: (error) => ({
+    type: ActionType.FETCH_REVIEWS_BY_ID_ERROR,
+    payload: error,
+  }),
   increaseVisibleFilmsCount: () => ({
     type: ActionType.INCREASE_VISIBLE_FILMS_COUNT,
   }),
@@ -41,6 +53,22 @@ export const ActionCreator = {
     type: ActionType.LOAD_PROMO_FILM,
     payload: {film, isDataLoaded},
   }),
+  loadFavoriteFilmsList: (films) => ({
+    type: ActionType.LOAD_FAVORITE_FILMS_LIST,
+    payload: films,
+  }),
+  loadFilm: (film, isFilmLoaded) => ({
+    type: ActionType.LOAD_FILM,
+    payload: {film, isFilmLoaded},
+  }),
+  loadReviews: (reviews, isReviewsLoaded) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: {reviews, isReviewsLoaded},
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
@@ -50,5 +78,5 @@ export const ActionCreator = {
   }),
   resetVisibleFilmsCount: () => ({
     type: ActionType.RESET_VISIBLE_FILMS_COUNT,
-  })
+  }),
 };

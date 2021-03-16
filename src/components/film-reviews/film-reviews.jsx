@@ -1,16 +1,18 @@
 import React from 'react';
 import Review from '../review/review';
 import PropTypes from 'prop-types';
+// import {connect} from 'react-redux';
+
 import shapeOfComment from '../../proptypes/shape-of-comment';
 
 
-const FilmReviews = ({comments}) => {
-  const leftComments = comments.slice(0, Math.round(comments.length / 2));
-  const rightComments = comments.slice(leftComments.length);
+const FilmReviews = ({reviews}) => {
+  const leftComments = reviews.slice(0, Math.round(reviews.length / 2));
+  const rightComments = reviews.slice(leftComments.length);
   const LeftColumn = () => {
     return (
       <div className="movie-card__reviews-col">
-        {leftComments.map((comment, i) => <Review comment={comment} key={`L${i}`}/>)}
+        {leftComments.map((comment, i) => <Review comment={reviews} key={`L${i}`}/>)}
       </div>
     );
   };
@@ -18,7 +20,7 @@ const FilmReviews = ({comments}) => {
   const RightColumn = () => {
     return (
       <div className="movie-card__reviews-col">
-        {rightComments.map((comment, i) => <Review comment={comment} key={`R${i}`}/>)}
+        {rightComments.map((comment, i) => <Review comment={reviews} key={`R${i}`}/>)}
       </div>
     );
   };
@@ -32,8 +34,16 @@ const FilmReviews = ({comments}) => {
 };
 
 FilmReviews.propTypes = {
-  comments: PropTypes.arrayOf(
+  reviews: PropTypes.arrayOf(
       shapeOfComment()
   ).isRequired
 };
-export default FilmReviews;
+
+/*
+const mapStateToProps = ({movies}) => ({
+  reviews: movies.reviews,
+});
+*/
+
+export default {FilmReviews};
+// export default connect(mapStateToProps, null)(FilmReviews);

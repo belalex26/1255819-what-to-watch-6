@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {fetchFilmById} from '../../store/api-actions';
 
 const Player = (props) => {
-  const {id} = useParams();
-  const movie = props.films.find((film) => film.id === +id);
+  const {film, isFilmLoaded, onLoad} = props;
+  const id = parseInt(useParams().id, 10);
+
+  useEffect(() => {
+    onLoad(id);
+  }, []);
+
+  if (!isFilmLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="player">
@@ -30,7 +43,7 @@ const Player = (props) => {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">{movie.name}</div>
+          <div className="player__name">{film.name}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
@@ -44,8 +57,25 @@ const Player = (props) => {
   );
 };
 
-Player.propTypes = PropTypes.arrayOf(
-    shapeOfFilm()
-).isRequired;
+Player.propTypes = {
+  film: PropTypes.arrayOf(
+      shapeOfFilm()
+  ).isRequired,
+  isFilmLoaded: PropTypes.bool.isRequired,
+  onLoad: PropTypes.func.isRequired,
+};
 
-export default Player;
+const mapStateToProps = ({movies}) => ({
+  film: movies.film,
+  isFilmLoaded: movies.isFilmLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoad(id) {
+    dispatch(fetchFilmById(id));
+  },
+});
+
+export {Player};
+export default connect(mapStateToProps, mapDispatchToProps)(Player);
+

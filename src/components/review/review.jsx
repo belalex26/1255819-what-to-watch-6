@@ -4,6 +4,7 @@ import shapeOfComment from '../../proptypes/shape-of-comment';
 import getMonthAsString from '../../proptypes/get-month-as-string';
 
 const Review = (props) => {
+
   const date = props.comment.date.split(`T`)[0].split(`-`);
   const month = getMonthAsString(+date[1]);
   const dateString = `${month} ${date[2]}, ${date[0]}`;
