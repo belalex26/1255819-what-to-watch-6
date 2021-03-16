@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
-import shapeOfComment from '../../proptypes/shape-of-comment';
+// import shapeOfComment from '../../proptypes/shape-of-comment';
 import FilmOverView from '../film-over-view/film-over-view';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
@@ -12,7 +12,7 @@ import {fetchFilmById, fetchReviewsById} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 const FilmScreen = (props) => {
-  const {film, comments, isFilmLoaded, isReviewsLoaded, onLoad} = props;
+  const {film, isFilmLoaded, isReviewsLoaded, onLoad} = props;
 
   const [state, setState] = useState(`Overview`);
   const showActiveClassNameIf = (text) => state === text ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`;
@@ -36,7 +36,7 @@ const FilmScreen = (props) => {
         return <FilmDetails film={film} />;
       }
       case `Reviews`: {
-        return <FilmReviews comments={comments}/>;
+        return <FilmReviews />;
       }
       default: {
         return <FilmOverView film={film} />;
@@ -127,7 +127,7 @@ const FilmScreen = (props) => {
 
 FilmScreen.propTypes = {
   film: shapeOfFilm(),
-  comments: shapeOfComment(),
+  // comments: shapeOfComment(),
   onLoad: PropTypes.func.isRequired,
   isFilmLoaded: PropTypes.bool.isRequired,
   isReviewsLoaded: PropTypes.bool.isRequired,
@@ -135,7 +135,7 @@ FilmScreen.propTypes = {
 
 const mapStateToProps = ({movies}) => ({
   film: movies.film,
-  comments: movies.comments,
+  // comments: movies.comments,
   isFilmLoaded: movies.isFilmLoaded,
   isReviewsLoaded: movies.isReviewsLoaded
 

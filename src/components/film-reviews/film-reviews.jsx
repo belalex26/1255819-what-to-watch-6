@@ -1,7 +1,7 @@
 import React from 'react';
 import Review from '../review/review';
 import PropTypes from 'prop-types';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 
 import shapeOfComment from '../../proptypes/shape-of-comment';
 
@@ -39,11 +39,11 @@ FilmReviews.propTypes = {
   ).isRequired
 };
 
-/*
+
 const mapStateToProps = ({movies}) => ({
   reviews: movies.reviews,
 });
-*/
 
-export default {FilmReviews};
-// export default connect(mapStateToProps, null)(FilmReviews);
+
+export {FilmReviews};
+export default connect(mapStateToProps, null)(FilmReviews);
