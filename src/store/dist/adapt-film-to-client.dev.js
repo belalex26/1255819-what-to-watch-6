@@ -1,4 +1,11 @@
-export const adaptFilmToClient = (film) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.adaptFilmToClient = void 0;
+
+var adaptFilmToClient = function adaptFilmToClient(film) {
   return {
     id: film.id,
     name: film.name,
@@ -16,10 +23,9 @@ export const adaptFilmToClient = (film) => {
     isFavorite: film.is_favorite,
     released: film.released,
     videoLink: film.video_link,
-    previewVideoLink: film.preview_video_link,
+    previewVideoLink: film.preview_video_link
   };
 };
-
 /*
 export const adaptPromo = (film) => {
   return {
@@ -33,6 +39,7 @@ export const adaptPromo = (film) => {
     isFavorite: film.is_favorite,
   };
 };*/
+
 /*
 export const adaptUserInfoToClient = (userInfo) => {
   return {
@@ -42,3 +49,6 @@ export const adaptUserInfoToClient = (userInfo) => {
     userAvatar: userInfo.avatar_url,
   };
 };*/
+
+
+exports.adaptFilmToClient = adaptFilmToClient;

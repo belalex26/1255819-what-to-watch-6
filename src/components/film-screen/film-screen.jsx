@@ -3,27 +3,49 @@ import {useParams, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import shapeOfFilm from '../../proptypes/shape-of-film';
-// import shapeOfComment from '../../proptypes/shape-of-comment';
+import {Rating, RatingLevel, AuthorizationStatus} from '../../const';
+import User from '../user/user';
+import Logo from '../logo/logo';
+import MyListButton from '../my-list-button/my-list-button';
+
 import FilmOverView from '../film-over-view/film-over-view';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
-import {fetchFilmById, fetchReviewsById} from '../../store/api-actions';
+import {fetchFilmById, fetchFilmsList, fetchReviewsById} from '../../store/api-actions';
+import {getAuthorizationStatus, getDataLoadedStatus, getFilm, getFilmLoadedStatus, getReviewsLoadedStatus} from '../../store/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 
+import shapeOfFilm from '../../proptypes/shape-of-film';
+
 const FilmScreen = (props) => {
-  const {film, isFilmLoaded, isReviewsLoaded, onLoad} = props;
+  const {film, isDataLoaded, isFilmLoaded, isReviewsLoaded, onLoad, authorizationStatus} = props;
 
   const [state, setState] = useState(`Overview`);
   const showActiveClassNameIf = (text) => state === text ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`;
   const handleClick = (evt) => setState(evt.target.innerText);
   const id = parseInt(useParams().id, 10);
 
+  const getMovieRatingLevel = (movie) => {
+    const rating = movie.rating;
+
+    if (rating < Rating.BAD) {
+      return RatingLevel.BAD;
+    } else if (rating < Rating.NORMAL) {
+      return RatingLevel.NORMAL;
+    } else if (rating < Rating.GOOD) {
+      return RatingLevel.GOOD;
+    } else if (rating < Rating.AWESOME) {
+      return RatingLevel.VERY_GOOD;
+    } else {
+      return RatingLevel.AWESOME;
+    }
+  };
+
   useEffect(() => {
     onLoad(id);
   }, []);
 
-  if (!isFilmLoaded || !isReviewsLoaded) {
+  if (!isFilmLoaded || !isReviewsLoaded || !isDataLoaded) {
     return (
       <LoadingScreen />
     );
@@ -52,18 +74,8 @@ const FilmScreen = (props) => {
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header movie-card__head">
-          <div className="logo">
-            <Link to="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-            </div>
-          </div>
+          <Logo />
+          <User />
         </header>
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
@@ -75,17 +87,16 @@ const FilmScreen = (props) => {
             <div className="movie-card__buttons">
               <Link to={`/player/${film.id}`} type="button" className="btn btn--play movie-card__button">
                 <svg viewBox="0 0 19 19" width={19} height={19}>
-                  <use xlinkto="#play-s" />
+                  <use xlinkHref="#play-s" />
                 </svg>
                 <span>Play</span>
               </Link>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width={19} height={20}>
-                  <use xlinkto="#add" />
-                </svg>
-                <span>My list</span>
-              </button>
-              <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
+              {authorizationStatus === AuthorizationStatus.AUTH &&
+                  <MyListButton film={film} />
+              }
+              {authorizationStatus === AuthorizationStatus.AUTH &&
+                <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
+              }
             </div>
           </div>
         </div>
@@ -113,8 +124,8 @@ const FilmScreen = (props) => {
             <div className="movie-rating">
               <div className="movie-rating__score">{film.rating}</div>
               <p className="movie-rating__meta">
-                <span className="movie-rating__level">Very good</span>
-                <span className="movie-rating__count">240 ratings</span>
+                <span className="movie-rating__level">{getMovieRatingLevel(film)}</span>
+                <span className="movie-rating__count">{film.scoresCount} ratings</span>
               </p>
             </div>
             <FilmInfo />
@@ -127,22 +138,24 @@ const FilmScreen = (props) => {
 
 FilmScreen.propTypes = {
   film: shapeOfFilm(),
-  // comments: shapeOfComment(),
   onLoad: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
   isFilmLoaded: PropTypes.bool.isRequired,
   isReviewsLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({movies}) => ({
-  film: movies.film,
-  // comments: movies.comments,
-  isFilmLoaded: movies.isFilmLoaded,
-  isReviewsLoaded: movies.isReviewsLoaded
-
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  film: getFilm(state),
+  isDataLoaded: getDataLoadedStatus(state),
+  isFilmLoaded: getFilmLoadedStatus(state),
+  isReviewsLoaded: getReviewsLoadedStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad(id) {
+    dispatch(fetchFilmsList());
     dispatch(fetchFilmById(id));
     dispatch(fetchReviewsById(id));
   },

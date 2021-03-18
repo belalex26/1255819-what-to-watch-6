@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import FilmCard from '../film-card/film-card';
 
 const MovieList = (props) => {
-  const {visibleFilms} = props;
+
+  const {films} = props;
   const [activeFilmState, setActiveFilmState] = useState(0);
   const handleOnMouseOver = (film) => {
     setActiveFilmState({...activeFilmState, id: film.id});
@@ -13,7 +14,7 @@ const MovieList = (props) => {
   return (
     <div className="catalog__movies-list" data-active={activeFilmState}>
       {
-        visibleFilms.map((film) => {
+        films.map((film) => {
           return <FilmCard
             name={film.name}
             id={film.id}
@@ -29,7 +30,7 @@ const MovieList = (props) => {
 };
 
 MovieList.propTypes = {
-  visibleFilms: PropTypes.arrayOf(
+  films: PropTypes.arrayOf(
       PropTypes.shape({
         "name": PropTypes.string.isRequired,
         "previewImage": PropTypes.string.isRequired,

@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, AppRoute} from '../../const';
 import LoadingScreen from '../loading-screen/loading-screen';
 
+import {getAuthorizationStatus} from '../../store/selectors';
 
 const PrivateRoute = ({render, path, exact, authorizationStatus}) => {
   if (authorizationStatus === AuthorizationStatus.INIT) {
@@ -21,7 +22,7 @@ const PrivateRoute = ({render, path, exact, authorizationStatus}) => {
         return (
           authorizationStatus === AuthorizationStatus.AUTH
             ? render(routeProps)
-            : <Redirect to={`/login`} />
+            : <Redirect to={AppRoute.LOGIN} />
         );
       }}
     />
@@ -35,10 +36,9 @@ PrivateRoute.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({movie}) => ({
-  authorizationStatus: movie.authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
-
 
 export {PrivateRoute};
 export default connect(mapStateToProps, null)(PrivateRoute);

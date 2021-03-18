@@ -1,42 +1,50 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from "react-router-dom";
 
-import shapeOfFilm from '../../proptypes/shape-of-film';
+import User from '../user/user';
 import LoadingScreen from '../loading-screen/loading-screen';
 import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
+import MyListButton from '../my-list-button/my-list-button';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
-import {getVisibleFilms} from '../../selectors';
+import {AuthorizationStatus} from '../../const';
+
+import {getAuthorizationStatus, getDataLoadedStatus, getFilmsListLoadingStatus, getPromo, getPromoLoadedStatus, getPromoLoadingStatus, getVisibleFilms} from '../../store/selectors';
 import {ActionCreator} from '../../store/action';
-import {fetchFilmsList} from '../../store/api-actions';
+import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
+
+import shapeOfFilm from '../../proptypes/shape-of-film';
 
 const MainScreen = (props) => {
-  const {films, onLoad, isDataLoaded, onLoadData} = props;
+  const {authorizationStatus, promo, films, onLoad, isDataLoaded, isFilmsListLoading, isPromoLoaded, isPromoLoading, loadFilmsList, loadPromoFilm} = props;
 
   useEffect(() => {
     onLoad();
   }, []);
 
   useEffect(() => {
-    if (!isDataLoaded) {
-      onLoadData();
+    if (!isPromoLoaded && !isPromoLoading) {
+      loadPromoFilm();
     }
-  }, [isDataLoaded]);
+    if (!isDataLoaded && !isFilmsListLoading) {
+      loadFilmsList();
+    }
+  }, [isDataLoaded, isPromoLoaded, isFilmsListLoading, isPromoLoading]);
 
-  if (!isDataLoaded) {
+  if (!isDataLoaded || !isPromoLoaded) {
     return (
       <LoadingScreen />
     );
   }
-
-  const altImgDesc = `${films[0].name} poster`;
+  const altImgDesc = `${promo.name} poster`;
 
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={films[0].backgroundImage} alt={films[0].name} />
+          <img src={promo.backgroundImage} alt={promo.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -49,40 +57,32 @@ const MainScreen = (props) => {
               <span className="logo__letter logo__letter--3">W</span>
             </a>
           </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <User />
         </header>
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src={films[0].posterImage} alt={altImgDesc} width="218" height="327" />
+              <img src={promo.posterImage} alt={altImgDesc} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{films[0].title}</h2>
+              <h2 className="movie-card__title">{promo.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{films[0].genre}</span>
-                <span className="movie-card__year">{films[0].released}</span>
+                <span className="movie-card__genre">{promo.genre}</span>
+                <span className="movie-card__year">{promo.released}</span>
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
+                <Link to={`/player/${promo.id}`} role="button" className="btn btn--play movie-card__button" type="button">
+                  <svg viewBox="0 0 19 19" width={19} height={19}>
+                    <use xlinkHref="#play-s" />
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                </Link>
+                {authorizationStatus === AuthorizationStatus.AUTH &&
+                  <MyListButton film={promo} />
+                }
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ const MainScreen = (props) => {
         <section className="catalog">
 
           <GenreList />
-          <MovieList visibleFilms={films} />
+          <MovieList films={films} />
 
           <div className="catalog__more">
             <ShowMoreBtn />
@@ -122,24 +122,38 @@ MainScreen.propTypes = {
   films: PropTypes.arrayOf(
       shapeOfFilm()
   ).isRequired,
-  onLoad: PropTypes.func.isRequired,
+  promo: shapeOfFilm(),
+  authorizationStatus: PropTypes.string.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired
+  isFilmsListLoading: PropTypes.bool,
+  isPromoLoaded: PropTypes.bool.isRequired,
+  isPromoLoading: PropTypes.bool.isRequired,
+  onLoad: PropTypes.func.isRequired,
+  loadFilmsList: PropTypes.func.isRequired,
+  loadPromoFilm: PropTypes.func.isRequired,
+
 };
 
-const mapStateToProps = ({movies}) => ({
-  isDataLoaded: movies.isDataLoaded,
-  promo: movies.promo,
-  films: getVisibleFilms(movies),
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  isDataLoaded: getDataLoadedStatus(state),
+  isPromoLoaded: getPromoLoadedStatus(state),
+  isFilmsListLoading: getFilmsListLoadingStatus(state),
+  isPromoLoading: getPromoLoadingStatus(state),
+  promo: getPromo(state),
+  films: getVisibleFilms(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad() {
     dispatch(ActionCreator.resetVisibleFilmsCount());
   },
-  onLoadData() {
+  loadFilmsList() {
     dispatch(fetchFilmsList());
   },
+  loadPromoFilm() {
+    dispatch(fetchPromoFilm());
+  }
 });
 
 export {MainScreen};

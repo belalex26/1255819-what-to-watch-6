@@ -1,49 +1,86 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
-const commentForm = () => {
-  const [reviewText, setReviewText] = useState(``);
-  const handleTextareaChange = (evt) => setReviewText(evt.target.value);
+import {commentPost} from '../../store/api-actions';
+import shapeOfFilm from '../../proptypes/shape-of-film';
+import {getErrorMessage, getFilm, getReviewFormDisabledStatus} from '../../store/selectors';
+
+const RATINGS_COUNT = 10;
+const MIN_REVIEW_LENGTH = 5;
+const MAX_REVIEW_LENGTH = 400;
+
+const CommentForm = (props) => {
+  const {film, onReviewSubmit, errorMessage, isReviewFormDisabled} = props;
+
+  const [review, setReview] = useState({
+    rating: 0,
+    comment: ``,
+  });
+
+  let [isPostDisabled, setIsPostDisabled] = useState(true);
+
+  useEffect(() => {
+    if (review.rating === 0 || review.comment.length < MIN_REVIEW_LENGTH || review.comment.length > MAX_REVIEW_LENGTH) {
+      setIsPostDisabled(true);
+    } else {
+      setIsPostDisabled(false);
+    }
+  }, [review.rating, review.comment]);
+
+  const setRating = (evt) => setReview({...review, rating: evt.target.value});
+  const setComment = (evt) => setReview({...review, comment: evt.target.value});
+
+  const handleReviewSubmit = (evt) => {
+    evt.preventDefault();
+    onReviewSubmit(film.id, review.rating, review.comment);
+  };
+
+  const ratingValues = Array.from({length: RATINGS_COUNT}, (_, i) => i + 1);
 
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={handleReviewSubmit}>
       <div className="rating">
-        <div className="rating__stars">
-          <input className="rating__input" id="star-1" type="radio" name="rating" defaultValue={1} />
-          <label className="rating__label" htmlFor="star-1">Rating 1</label>
-          <input className="rating__input" id="star-2" type="radio" name="rating" defaultValue={2} />
-          <label className="rating__label" htmlFor="star-2">Rating 2</label>
-          <input className="rating__input" id="star-3" type="radio" name="rating" defaultValue={3} defaultChecked />
-          <label className="rating__label" htmlFor="star-3">Rating 3</label>
-          <input className="rating__input" id="star-4" type="radio" name="rating" defaultValue={4} />
-          <label className="rating__label" htmlFor="star-4">Rating 4</label>
-          <input className="rating__input" id="star-5" type="radio" name="rating" defaultValue={5} />
-          <label className="rating__label" htmlFor="star-5">Rating 5</label>
-          <input className="rating__input" id="star-6" type="radio" name="rating" defaultValue={6} />
-          <label className="rating__label" htmlFor="star-6">Rating 6</label>
-          <input className="rating__input" id="star-7" type="radio" name="rating" defaultValue={7} />
-          <label className="rating__label" htmlFor="star-7">Rating 7</label>
-          <input className="rating__input" id="star-8" type="radio" name="rating" defaultValue={8} defaultChecked />
-          <label className="rating__label" htmlFor="star-8">Rating 8</label>
-          <input className="rating__input" id="star-9" type="radio" name="rating" defaultValue={9} />
-          <label className="rating__label" htmlFor="star-9">Rating 9</label>
-          <input className="rating__input" id="star-10" type="radio" name="rating" defaultValue={10} />
-          <label className="rating__label" htmlFor="star-10">Rating 10</label>
+        <div className="rating__stars" onChange={setRating}>
+          {
+            ratingValues.map((value) => (
+              <React.Fragment key={`star-${value}`}>
+                <input className="rating__input" id={`star-${value}`} type="radio" name="rating" value={value} disabled={isReviewFormDisabled}/>
+                <label className="rating__label" htmlFor={`star-${value}`}>Rating {value}</label>
+              </React.Fragment>
+            ))
+          }
         </div>
       </div>
       <div className="add-review__text">
-        <textarea className="add-review__textarea"
-          name="review-text"
-          id="review-text"
-          placeholder="Review text"
-          value={reviewText}
-          onChange = {handleTextareaChange}
-        />
+        <textarea disabled={isReviewFormDisabled} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={setComment} minLength={MIN_REVIEW_LENGTH} maxLength={MAX_REVIEW_LENGTH} required/>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={isPostDisabled || isReviewFormDisabled}>Post</button>
         </div>
       </div>
+      {errorMessage && `${errorMessage}`}
     </form>
   );
 };
 
-export default commentForm;
+CommentForm.propTypes = {
+  film: shapeOfFilm(),
+  onReviewSubmit: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+  isReviewFormDisabled: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  film: getFilm(state),
+  errorMessage: getErrorMessage(state),
+  isReviewFormDisabled: getReviewFormDisabledStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onReviewSubmit(id, rating, comment) {
+    dispatch(commentPost(id, rating, comment));
+  },
+});
+
+export {CommentForm};
+export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

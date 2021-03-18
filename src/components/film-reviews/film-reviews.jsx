@@ -4,32 +4,12 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import shapeOfComment from '../../proptypes/shape-of-comment';
+import {getFilm, getReviews} from '../../store/selectors';
 
 
 const FilmReviews = ({reviews}) => {
-  const leftComments = reviews.slice(0, Math.round(reviews.length / 2));
-  const rightComments = reviews.slice(leftComments.length);
-  const LeftColumn = () => {
-    return (
-      <div className="movie-card__reviews-col">
-        {leftComments.map((comment, i) => <Review comment={reviews} key={`L${i}`}/>)}
-      </div>
-    );
-  };
-
-  const RightColumn = () => {
-    return (
-      <div className="movie-card__reviews-col">
-        {rightComments.map((comment, i) => <Review comment={reviews} key={`R${i}`}/>)}
-      </div>
-    );
-  };
-
   return (
-    <div className="movie-card__reviews movie-card__row">
-      <LeftColumn />
-      <RightColumn />
-    </div>
+    <Review comment={reviews} />
   );
 };
 
@@ -40,10 +20,10 @@ FilmReviews.propTypes = {
 };
 
 
-const mapStateToProps = ({movies}) => ({
-  reviews: movies.reviews,
+const mapStateToProps = (state) => ({
+  film: getFilm(state),
+  reviews: getReviews(state)
 });
-
 
 export {FilmReviews};
 export default connect(mapStateToProps, null)(FilmReviews);

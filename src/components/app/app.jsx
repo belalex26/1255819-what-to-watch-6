@@ -8,42 +8,40 @@ import FilmScreen from '../film-screen/film-screen';
 import AddReview from '../add-review/add-review';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import MoreLikeThis from '../more-like-this/more-like-this';
 
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from "../../browser-history";
+import {AppRoute} from '../../const';
 
 const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
-      <Switch>
 
-        <Route path='/' exact >
+      <Switch>
+        <Route exact path={AppRoute.ROOT}>
           <MainScreen />
         </Route>
 
-        <Route path='/login' exact>
+        <Route exact path={AppRoute.LOGIN}>
           <SingInScreen />
         </Route>
 
         <PrivateRoute exact
-          path='/mylist'
+          path={AppRoute.MY_LIST}
           render={() => <MyListScreen />}
         >
         </PrivateRoute>
-
-        <Route path='/films/:id' exact>
+        <Route exact path={AppRoute.FILM}>
           <FilmScreen />
-          <MoreLikeThis />
         </Route>
 
         <PrivateRoute exact
-          path='/films/:id/review'
+          path={AppRoute.ADD_REVIEW}
           render={() => <AddReview />}
         >
         </PrivateRoute>
 
-        <Route path='/player/:id' exact >
+        <Route exact path={AppRoute.PLAYER}>
           <Player />
         </Route>
 
@@ -52,6 +50,7 @@ const App = () => {
         </Route>
 
       </Switch>
+
     </BrowserRouter>
   );
 };

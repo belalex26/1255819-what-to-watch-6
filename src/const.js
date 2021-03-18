@@ -1,15 +1,33 @@
-const DEFAULT_GENRE = `All genres`;
-const MAX_GENRES_COUNT = 9;
-const DEFAULT_VISIBLE_FILMS_COUNT = 8;
+export const DEFAULT_GENRE = `All genres`;
+export const MAX_GENRES_COUNT = 9;
+export const DEFAULT_VISIBLE_FILMS_COUNT = 8;
+export const NUMBER_OF_SECONDS_IN_HOUR = 3600;
+export const NUMBER_OF_MINUTES_IN_HOUR = 60;
+export const PLAYER_TOGGLER_WIDTH = 17;
 
-const AuthorizationStatus = {
+export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
   INIT: `INIT`,
   AUTH_ERROR: `AUTH_ERROR`
 };
 
-const AppRoute = {
+export const Rating = {
+  BAD: 3,
+  NORMAL: 5,
+  GOOD: 8,
+  AWESOME: 10,
+};
+
+export const RatingLevel = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`,
+};
+
+export const AppRoute = {
   ADD_REVIEW: `/films/:id/review`,
   FILM: `/films/:id`,
   LOGIN: `/login`,
@@ -18,7 +36,15 @@ const AppRoute = {
   ROOT: `/`,
 };
 
-const genreList = [
+export const ApiRoute = {
+  FAVORITE_FILMS: `/favorite`,
+  FILMS: `/films`,
+  LOGIN: `/login`,
+  LOGOUT: `/logout`,
+  PROMO_FILM: `/films/promo`,
+};
+
+export const genreList = [
   {
     title: `All genres`,
     value: null
@@ -61,5 +87,8 @@ const genreList = [
   }
 ];
 
+export const MouseEvent = {
+  MOUSE_MOVE: `mousemove`,
+  MOUSE_UP: `mouseup`,
+};
 
-export {DEFAULT_GENRE, MAX_GENRES_COUNT, DEFAULT_VISIBLE_FILMS_COUNT, AuthorizationStatus, AppRoute, genreList};
