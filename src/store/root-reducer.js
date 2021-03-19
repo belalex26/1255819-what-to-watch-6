@@ -1,12 +1,17 @@
 import {combineReducers} from 'redux';
-import {errorReducer, reducer} from './reducer';
+
+import {viewReducer} from './reducers/view-reducer';
+import {errorReducer} from './reducers/error-reducer';
+import {dataReducer} from './reducers/data-reducer';
 
 export const NameSpace = {
-  FILMS: `movies`,
-  ERRORS: `errors`,
+  FILMS: `FILMS`,
+  ERRORS: `ERRORS`,
+  VIEW: `VIEW`,
 };
 
 export default combineReducers({
-  [NameSpace.FILMS]: reducer,
+  [NameSpace.FILMS]: dataReducer,
   [NameSpace.ERRORS]: errorReducer,
+  [NameSpace.VIEW]: viewReducer,
 });

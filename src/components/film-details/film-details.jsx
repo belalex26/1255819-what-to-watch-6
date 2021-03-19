@@ -1,26 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useParams} from 'react-router-dom';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
 
 const FilmDetails = (props) => {
+  const {film} = props;
 
-  const {id} = useParams();
-  const movie = props.films.find((film) => film.id === +id);
-
-  const movieDuration = `${Math.floor(movie.runTime / 60)}h ${movie.runTime % 60}m`;
+  const movieDuration = `${Math.floor(film.runTime / 60)}h ${film.runTime % 60}m`;
 
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Director</strong>
-          <span className="movie-card__details-value">{movie.director}</span>
+          <span className="movie-card__details-value">{film.director}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Starring</strong>
-          <span className="movie-card__details-value" style={{whiteSpace: `pre-line`}}>{movie.starring.join(`, \n`)}</span>
+          <span className="movie-card__details-value" style={{whiteSpace: `pre-line`}}>{film.starring.join(`, \n`)}</span>
         </p>
       </div>
       <div className="movie-card__text-col">
@@ -30,11 +27,11 @@ const FilmDetails = (props) => {
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Genre</strong>
-          <span className="movie-card__details-value">{movie.genre}</span>
+          <span className="movie-card__details-value">{film.genre}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Released</strong>
-          <span className="movie-card__details-value">{movie.released}</span>
+          <span className="movie-card__details-value">{film.released}</span>
         </p>
       </div>
     </div>
