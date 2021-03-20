@@ -19,8 +19,6 @@ export const ActionType = {
   RESET_VISIBLE_FILMS_COUNT: `view/resetVisibleFilmsCount`,
   COMMENT_POST_ERROR: `data/commentPostError`,
   SET_IS_REVIEW_FORM_DISABLED: `view/setIsReviewFormDisabled`,
-  RESET_ACTIVE_TAB: `view/resetActiveTab`,
-  SET_ACTIVE_TAB: `view/setActiveTab`,
   SET_FAVORITE_STATUS: `data/setFavoriteStatus`,
 };
 
@@ -101,13 +99,6 @@ export const ActionCreator = {
   setIsReviewFormDisabled: (isDisabled) => ({
     type: ActionType.SET_IS_REVIEW_FORM_DISABLED,
     payload: isDisabled,
-  }),
-  resetActiveTab: () => ({
-    type: ActionType.RESET_ACTIVE_TAB,
-  }),
-  setActiveTab: (activeTab) => ({
-    type: ActionType.SET_ACTIVE_TAB,
-    payload: activeTab,
   }),
   setFavoriteStatus: (film) => ({
     type: ActionType.SET_FAVORITE_STATUS,

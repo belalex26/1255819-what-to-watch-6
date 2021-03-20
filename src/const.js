@@ -42,6 +42,7 @@ export const ApiRoute = {
   LOGIN: `/login`,
   LOGOUT: `/logout`,
   PROMO_FILM: `/films/promo`,
+  ERROR_404: `/404`,
 };
 
 export const genreList = [

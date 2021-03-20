@@ -38,7 +38,6 @@ const MainScreen = (props) => {
       <LoadingScreen />
     );
   }
-  const altImgDesc = `${promo.name} poster`;
 
   return (
     <React.Fragment>
@@ -63,7 +62,7 @@ const MainScreen = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src={promo.posterImage} alt={altImgDesc} width="218" height="327" />
+              <img src={promo.posterImage} alt={`${promo.name} poster`} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
