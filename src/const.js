@@ -4,6 +4,7 @@ export const DEFAULT_VISIBLE_FILMS_COUNT = 8;
 export const NUMBER_OF_SECONDS_IN_HOUR = 3600;
 export const NUMBER_OF_MINUTES_IN_HOUR = 60;
 export const PLAYER_TOGGLER_WIDTH = 17;
+export const MAX_SIMILAR_FILMS_COUNT = 4;
 
 export const AuthorizationStatus = {
   AUTH: `AUTH`,

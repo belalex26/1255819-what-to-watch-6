@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const PlayButton = (props) => {
   const {isPlaying, onButtonClick} = props;
 
-  if (isPlaying) {
-    return (
-      <button
+  return (
+    isPlaying
+      ? <button
         type="button"
         className="player__play"
         onClick={onButtonClick}>
@@ -15,21 +15,16 @@ const PlayButton = (props) => {
         </svg>
         <span>Pause</span>
       </button>
-    );
-  } else {
-    return (
-      <button
+      : <button
         type="button"
         className="player__play"
-        onClick={onButtonClick}
-      >
+        onClick={onButtonClick}>
         <svg viewBox="0 0 19 19" width={19} height={19}>
           <use xlinkHref="#play-s"></use>
         </svg>
         <span>Play</span>
       </button>
-    );
-  }
+  );
 };
 
 PlayButton.propTypes = {

@@ -10,6 +10,10 @@ const initialState = {
   isFilmLoaded: false,
   isReviewsLoaded: false,
   films: [],
+  film: {},
+  reviews: [],
+  favoriteFilms: [],
+  promo: {},
 };
 
 const dataReducer = (state = initialState, action) => {

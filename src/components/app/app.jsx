@@ -1,5 +1,7 @@
 import React from 'react';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import MainScreen from '../main-screen/main-screen';
 import SingInScreen from '../sing-in-screen/sing-in-screen';
@@ -13,7 +15,15 @@ import PrivateRoute from '../private-route/private-route';
 import browserHistory from "../../browser-history";
 import {AppRoute} from '../../const';
 
-const App = () => {
+import {getVisibleFilms} from '../../store/selectors';
+import {ActionCreator} from '../../store/action';
+import {fetchFilmsList} from '../../store/api-actions';
+
+import shapeOfFilm from '../../proptypes/shape-of-film';
+
+
+const App = (props) => {
+
   return (
     <BrowserRouter history={browserHistory}>
 
@@ -32,7 +42,7 @@ const App = () => {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.FILM}>
-          <FilmScreen />
+          <FilmScreen films={props.films} />
         </Route>
 
         <PrivateRoute exact
@@ -55,5 +65,24 @@ const App = () => {
   );
 };
 
-export default App;
+
+App.propTypes = PropTypes.arrayOf(
+    shapeOfFilm()
+).isRequired;
+
+const mapStateToProps = (state) => ({
+  films: getVisibleFilms(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoad() {
+    dispatch(ActionCreator.resetVisibleFilmsCount());
+  },
+  loadFilmsList() {
+    dispatch(fetchFilmsList());
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
