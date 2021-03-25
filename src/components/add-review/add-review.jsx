@@ -60,10 +60,10 @@ const AddReview = (props) => {
 };
 
 AddReview.propTypes = {
-  film: shapeOfFilm().isRequired,
+  film: shapeOfFilm(),
   onLoad: PropTypes.func.isRequired,
   isFilmLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired
+  onLoadData: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({

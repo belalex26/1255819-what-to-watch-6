@@ -36,7 +36,7 @@ MovieList.propTypes = {
         "previewImage": PropTypes.string.isRequired,
         "id": PropTypes.number.isRequired
       })
-  ).isRequired
+  )
 };
 
 export default MovieList;

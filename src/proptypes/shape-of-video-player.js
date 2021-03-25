@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const videoPlayerShape = () => {
+const shapeOfVideoPlayer = () => {
   return PropTypes.shape({
     "alt": PropTypes.string.isRequired,
     "height": PropTypes.number.isRequired,
@@ -13,4 +13,4 @@ const videoPlayerShape = () => {
 };
 
 
-export default videoPlayerShape;
+export default shapeOfVideoPlayer;

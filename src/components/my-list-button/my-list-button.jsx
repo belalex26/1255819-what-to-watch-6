@@ -43,9 +43,12 @@ const MyListButton = (props) => {
   );
 };
 
+
 MyListButton.propTypes = {
   film: shapeOfFilm(),
-  promo: shapeOfFilm(),
+  promo: PropTypes.arrayOf(
+      shapeOfFilm()
+  ),
   onClick: PropTypes.func.isRequired,
 };
 

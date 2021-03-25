@@ -1,25 +1,28 @@
 import React, {Fragment, useEffect, useRef} from 'react';
-import videoPlayerShape from '../../proptypes/shape-of-video-player';
+
+import shapeOfVideoPlayer from '../../proptypes/shape-of-video-player';
 
 const VideoPlayer = (props) => {
   const {isPlaying, src, posterImage, width, height, alt} = props;
-  const videoRef = useRef();
+  const videoRef = useRef(null);
 
   useEffect(() => {
-    return () => {
-      videoRef.current.oncanplaythrough = null;
-      videoRef.current.onplay = null;
-      videoRef.current.onload = null;
-      videoRef.current = null;
-    };
-  }, [src]);
+    const video = videoRef.current;
+    let timeoutId;
 
-  useEffect(() => {
     if (isPlaying) {
-      videoRef.current.play();
-      return;
+      timeoutId = setTimeout(() => {
+        video.play();
+      }, 1000);
+
+    } else {
+      clearTimeout(timeoutId);
+      video.load();
     }
-    videoRef.current.load();
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [isPlaying]);
 
   return (
@@ -36,6 +39,7 @@ const VideoPlayer = (props) => {
   );
 };
 
-VideoPlayer.propTypes = videoPlayerShape;
+VideoPlayer.propTypes = shapeOfVideoPlayer;
 
 export default VideoPlayer;
+

@@ -7,11 +7,12 @@ import PropTypes from 'prop-types';
 import shapeOfFilm from '../../proptypes/shape-of-film';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PlayButton from '../play-button/play-button';
-import ProgressTogglerTimer from '../progress-toggle-timer/progress-toggle-timer';
+import PlayerToggler from '../player-toggler/player-toggler';
+
 import {fetchFilmById} from '../../store/api-actions';
 import {getFilm, getFilmLoadedStatus} from '../../store/selectors';
-import {getTimeInUserFormat} from '../../utils';
-import {NUMBER_OF_SECONDS_IN_HOUR, PLAYER_TOGGLER_WIDTH} from '../../const';
+import {format} from '../../utils';
+
 
 const Player = (props) => {
   const {film, isFilmLoaded, onLoad} = props;
@@ -20,16 +21,13 @@ const Player = (props) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [inProgress, setProgress] = useState(0);
-  const [time, setTimer] = useState(getTimeInUserFormat(0, false));
+  const [timeLapse, setTimeLapse] = useState(false);
+  const [previousTime, setPreviousTime] = useState(0);
+  const [togglerProgress, setTogglerProgress] = useState(0);
 
   const videoRef = useRef();
 
   const hrefToFilmPage = `/films/${film.id}`;
-
-  const gap = 130;
-
-  let hasHours = false;
 
   useEffect(() => {
     onLoad(id);
@@ -73,26 +71,17 @@ const Player = (props) => {
     setIsPlaying(!isPlaying);
   };
 
-  const handleCanPlay = () => {
-    hasHours = (videoRef.current.duration / NUMBER_OF_SECONDS_IN_HOUR) >= 1;
-    setTimer(getTimeInUserFormat(videoRef.current.currentTime, hasHours));
-    setIsPlaying(true);
-  };
-
   const handleTimeUpdate = () => {
-    const progress = (Math.floor(videoRef.current.currentTime) / Math.floor(videoRef.current.duration)) * 100;
+    const duration = videoRef.current.duration;
+    const currentTime = videoRef.current.currentTime;
+    const time = Math.floor((duration - currentTime) % 60);
 
-    setTimer(getTimeInUserFormat(videoRef.current.currentTime, hasHours));
-    setProgress(Math.floor(progress));
-  };
-
-  const handleProgressClick = (evt) => {
-    const posX = evt.clientX - PLAYER_TOGGLER_WIDTH;
-    const timePos = (posX * 100) / (window.screen.availWidth - gap);
-
-    setProgress(Math.floor(timePos));
-    videoRef.current.currentTime = (timePos * Math.round(videoRef.current.duration)) / 100;
-    setTimer(getTimeInUserFormat(videoRef.current.currentTime, hasHours));
+    if (previousTime !== time) {
+      setPreviousTime(time);
+      setTimeLapse(format(duration - currentTime));
+    }
+    const progress = Math.round((currentTime / duration * 100) * 100) / 100;
+    setTogglerProgress(progress);
   };
 
   return (
@@ -103,8 +92,6 @@ const Player = (props) => {
         ref={videoRef}
         className="player__video"
         poster={film.backgroundImage}
-        onClick={handlePlayBtnClick}
-        onCanPlay={handleCanPlay}
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleEndVideo}
       >
@@ -112,12 +99,13 @@ const Player = (props) => {
       <Link to={hrefToFilmPage}>
         <button type="button" className="player__exit">Exit</button>
       </Link>
+
       <div className="player__controls">
-        <ProgressTogglerTimer
-          progress={inProgress}
-          timer={time}
-          onProgressClickHandler={handleProgressClick}
-        />
+        <div className="player__controls-row">
+          <PlayerToggler togglerProgress={togglerProgress}/>
+          <div className="player__time-value">{timeLapse}</div>
+        </div>
+
         <div className="player__controls-row">
           <PlayButton
             isPlaying={isPlaying}
@@ -141,7 +129,7 @@ const Player = (props) => {
 };
 
 Player.propTypes = {
-  film: shapeOfFilm().isRequired,
+  film: shapeOfFilm(),
   isFilmLoaded: PropTypes.bool.isRequired,
   onLoad: PropTypes.func.isRequired,
 };
