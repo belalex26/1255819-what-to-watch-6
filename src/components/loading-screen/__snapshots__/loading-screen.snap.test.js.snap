@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should LoadingScreen render correctly 1`] = `
+<div>
+  <section
+    class="loading"
+  >
+    <h2>
+      Loading...
+    </h2>
+    <h3>
+      please wait, we will ship movies for you
+    </h3>
+  </section>
+</div>
+`;

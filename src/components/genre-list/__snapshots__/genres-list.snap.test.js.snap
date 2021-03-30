@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenresList renders correctly 1`] = `
+<div>
+  <ul
+    class="catalog__genres-list"
+  >
+    <li
+      class="catalog__genres-item catalog__genres-item--active"
+      data-genre="All genres"
+    >
+      <a
+        class="catalog__genres-link"
+        href="#"
+      >
+        All genres
+      </a>
+    </li>
+    <li
+      class="catalog__genres-item "
+      data-genre="Comedy"
+    >
+      <a
+        class="catalog__genres-link"
+        href="#"
+      >
+        Comedy
+      </a>
+    </li>
+    <li
+      class="catalog__genres-item "
+      data-genre="Drama"
+    >
+      <a
+        class="catalog__genres-link"
+        href="#"
+      >
+        Drama
+      </a>
+    </li>
+  </ul>
+</div>
+`;

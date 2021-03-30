@@ -9,6 +9,7 @@ const initialState = {
   isPromoLoading: false,
   isFilmLoaded: false,
   isReviewsLoaded: false,
+  isFilmsListLoading: false,
   films: [],
   film: {},
   reviews: [],

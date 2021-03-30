@@ -120,7 +120,7 @@ const MainScreen = (props) => {
 MainScreen.propTypes = {
   films: PropTypes.arrayOf(
       shapeOfFilm()
-  ).isRequired,
+  ),
   promo: shapeOfFilm(),
   authorizationStatus: PropTypes.string.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,

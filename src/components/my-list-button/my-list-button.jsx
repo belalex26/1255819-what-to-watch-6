@@ -36,7 +36,7 @@ const MyListButton = (props) => {
   };
 
   return (
-    <button onClick={handleClick} className="btn btn--list movie-card__button" type="button">
+    <button onClick={handleClick} className="btn btn--list movie-card__button" type="button" data-testid="myList_btn">
       {getButtonImage(film.isFavorite)}
       <span>My list</span>
     </button>
