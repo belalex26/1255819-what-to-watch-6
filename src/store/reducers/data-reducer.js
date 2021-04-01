@@ -14,7 +14,7 @@ const initialState = {
   film: {},
   reviews: [],
   favoriteFilms: [],
-  promo: {},
+  promo: null,
 };
 
 const dataReducer = (state = initialState, action) => {
