@@ -1,6 +1,6 @@
 import {getFilmsByGenre, getGenreList, timeFormat} from './utils';
 import {DEFAULT_GENRE} from './const';
-import {mockFilms, mockFilm} from './test-mocks';
+import {mockFilms} from './test-mocks';
 
 describe(`FilmUtils work correctly.`, () => {
   it(`Function getFilmsByGenre works correctly`, () => {

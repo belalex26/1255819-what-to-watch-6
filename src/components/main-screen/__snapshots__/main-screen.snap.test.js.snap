@@ -125,7 +125,7 @@ exports[`MainScreen renders correctly 1`] = `
             </a>
             <button
               class="btn btn--list movie-card__button"
-              data-testid="favorite_btn"
+              data-testid="myList_btn"
               type="button"
             >
               <svg
@@ -152,16 +152,11 @@ exports[`MainScreen renders correctly 1`] = `
     <section
       class="catalog"
     >
-      <h2
-        class="catalog__title visually-hidden"
-      >
-        Catalog
-      </h2>
       <ul
         class="catalog__genres-list"
       >
         <li
-          class="catalog__genres-item "
+          class="catalog__genres-item catalog__genres-item--active"
           data-genre="All genres"
         >
           <a
@@ -196,29 +191,27 @@ exports[`MainScreen renders correctly 1`] = `
       </ul>
       <div
         class="catalog__movies-list"
+        data-active="0"
       >
         <article
           class="small-movie-card catalog__movies-card"
-          data-id="1"
-          data-testid="movie-card"
+          data-testid="film-card"
         >
-          <a
-            href="/films/1"
+          <div
+            class="small-movie-card__image"
+            data-id="1"
           >
-            <div
-              class="small-movie-card__image"
-            >
-              <video
-                alt="The Grand Budapest Hotel"
-                height="175"
-                poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
-                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-                width="280"
-              />
-            </div>
-          </a>
+            <video
+              alt="The Grand Budapest Hotel"
+              height="175"
+              poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+              width="280"
+            />
+          </div>
           <h3
             class="small-movie-card__title"
+            data-testid="film-card-name"
           >
             <a
               class="small-movie-card__link"
@@ -230,26 +223,23 @@ exports[`MainScreen renders correctly 1`] = `
         </article>
         <article
           class="small-movie-card catalog__movies-card"
-          data-id="2"
-          data-testid="movie-card"
+          data-testid="film-card"
         >
-          <a
-            href="/films/2"
+          <div
+            class="small-movie-card__image"
+            data-id="2"
           >
-            <div
-              class="small-movie-card__image"
-            >
-              <video
-                alt="Stand By Me"
-                height="175"
-                poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
-                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-                width="280"
-              />
-            </div>
-          </a>
+            <video
+              alt="Stand By Me"
+              height="175"
+              poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+              width="280"
+            />
+          </div>
           <h3
             class="small-movie-card__title"
+            data-testid="film-card-name"
           >
             <a
               class="small-movie-card__link"
@@ -261,26 +251,23 @@ exports[`MainScreen renders correctly 1`] = `
         </article>
         <article
           class="small-movie-card catalog__movies-card"
-          data-id="3"
-          data-testid="movie-card"
+          data-testid="film-card"
         >
-          <a
-            href="/films/3"
+          <div
+            class="small-movie-card__image"
+            data-id="3"
           >
-            <div
-              class="small-movie-card__image"
-            >
-              <video
-                alt="Amelie"
-                height="175"
-                poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
-                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-                width="280"
-              />
-            </div>
-          </a>
+            <video
+              alt="Amelie"
+              height="175"
+              poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+              width="280"
+            />
+          </div>
           <h3
             class="small-movie-card__title"
+            data-testid="film-card-name"
           >
             <a
               class="small-movie-card__link"

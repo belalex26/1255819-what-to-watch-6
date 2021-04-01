@@ -1,4 +1,5 @@
 import {createSelector} from 'reselect';
+
 import {getFilmsByGenre} from '../utils';
 import {NameSpace} from './root-reducer';
 

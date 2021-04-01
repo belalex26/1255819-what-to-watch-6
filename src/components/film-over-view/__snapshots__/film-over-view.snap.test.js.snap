@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilmDetails renders correctly 1`] = `
+<div>
+  <div
+    class="movie-card__text"
+    data-testid="film-over-view"
+  >
+    <p>
+      An actress notices dangerous changes in the behavior and physical make-up of her 12-year-old daughter. Meanwhile, a young priest begins to doubt his faith while dealing with his mother's sickness.
+    </p>
+    <p
+      class="movie-card__director"
+    >
+      <strong>
+        Director: 
+        William Friedkin
+      </strong>
+    </p>
+    <p
+      class="movie-card__starring"
+    >
+      <strong>
+        Starring: 
+        Linda Blair, 
+Ellen Burstyn, 
+Jason Miller, 
+Max von Sydow
+      </strong>
+    </p>
+  </div>
+</div>
+`;

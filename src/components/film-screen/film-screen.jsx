@@ -30,7 +30,7 @@ const FilmScreen = (props) => {
 
   useEffect(() => {
     onLoad(id);
-  }, []);
+  }, [id]);
 
   if (!isFilmLoaded || !isReviewsLoaded || !isDataLoaded) {
     return (

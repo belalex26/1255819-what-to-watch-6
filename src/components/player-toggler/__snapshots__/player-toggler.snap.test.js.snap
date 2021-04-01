@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProgressTogglerTimer renders correctly 1`] = `
+exports[`PlayerToggler renders correctly 1`] = `
 <div>
   <div
     class="player__time"

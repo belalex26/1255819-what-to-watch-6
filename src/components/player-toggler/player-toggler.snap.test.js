@@ -10,7 +10,7 @@ import PlayerToggler from './player-toggler';
 
 const mockStore = configureStore({});
 
-it(`ProgressTogglerTimer renders correctly`, () => {
+it(`PlayerToggler renders correctly`, () => {
   const history = createMemoryHistory();
   const togglerProgress = 0;
 

@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilmDetails renders correctly 1`] = `
+<div>
+  <div
+    class="movie-card__text movie-card__row"
+  >
+    <div
+      class="movie-card__text-col"
+    >
+      <p
+        class="movie-card__details-item"
+      >
+        <strong
+          class="movie-card__details-name"
+        >
+          Director
+        </strong>
+        <span
+          class="movie-card__details-value"
+        >
+          William Friedkin
+        </span>
+      </p>
+      <p
+        class="movie-card__details-item"
+      >
+        <strong
+          class="movie-card__details-name"
+        >
+          Starring
+        </strong>
+        <span
+          class="movie-card__details-value"
+          style="white-space: pre-line;"
+        >
+          Linda Blair, 
+Ellen Burstyn, 
+Jason Miller, 
+Max von Sydow
+        </span>
+      </p>
+    </div>
+    <div
+      class="movie-card__text-col"
+    >
+      <p
+        class="movie-card__details-item"
+      >
+        <strong
+          class="movie-card__details-name"
+        >
+          Run Time
+        </strong>
+        <span
+          class="movie-card__details-value"
+        >
+          2h 8m
+        </span>
+      </p>
+      <p
+        class="movie-card__details-item"
+      >
+        <strong
+          class="movie-card__details-name"
+        >
+          Genre
+        </strong>
+        <span
+          class="movie-card__details-value"
+        >
+          Thriller
+        </span>
+      </p>
+      <p
+        class="movie-card__details-item"
+      >
+        <strong
+          class="movie-card__details-name"
+        >
+          Released
+        </strong>
+        <span
+          class="movie-card__details-value"
+        >
+          1973
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+`;
