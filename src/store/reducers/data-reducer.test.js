@@ -18,7 +18,7 @@ describe(`Data-Reducer`, () => {
       film: {},
       reviews: [],
       favoriteFilms: [],
-      promo: {},
+      promo: null,
     };
     expect(dataReducer(undefined, {}))
       .toEqual(initialState);
