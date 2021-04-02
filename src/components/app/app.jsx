@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -12,7 +12,6 @@ import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 import PrivateRoute from '../private-route/private-route';
-import browserHistory from "../../browser-history";
 import {AppRoute} from '../../const';
 
 import {getVisibleFilms} from '../../store/selectors';
@@ -25,43 +24,41 @@ import shapeOfFilm from '../../proptypes/shape-of-film';
 const App = (props) => {
 
   return (
-    <BrowserRouter history={browserHistory}>
 
-      <Switch>
-        <Route exact path={AppRoute.ROOT}>
-          <MainScreen />
-        </Route>
+    <Switch>
+      <Route exact path={AppRoute.ROOT}>
+        <MainScreen />
+      </Route>
 
-        <Route exact path={AppRoute.LOGIN}>
-          <SingInScreen />
-        </Route>
+      <Route exact path={AppRoute.LOGIN}>
+        <SingInScreen />
+      </Route>
 
-        <PrivateRoute exact
-          path={AppRoute.MY_LIST}
-          render={() => <MyListScreen />}
-        >
-        </PrivateRoute>
-        <Route exact path={AppRoute.FILM}>
-          <FilmScreen films={props.films} />
-        </Route>
+      <PrivateRoute exact
+        path={AppRoute.MY_LIST}
+        render={() => <MyListScreen />}
+      >
+      </PrivateRoute>
+      <Route exact path={AppRoute.FILM}>
+        <FilmScreen films={props.films} />
+      </Route>
 
-        <PrivateRoute exact
-          path={AppRoute.ADD_REVIEW}
-          render={() => <AddReview />}
-        >
-        </PrivateRoute>
+      <PrivateRoute exact
+        path={AppRoute.ADD_REVIEW}
+        render={() => <AddReview />}
+      >
+      </PrivateRoute>
 
-        <Route exact path={AppRoute.PLAYER}>
-          <Player />
-        </Route>
+      <Route exact path={AppRoute.PLAYER}>
+        <Player />
+      </Route>
 
-        <Route>
-          <NotFoundScreen />
-        </Route>
+      <Route>
+        <NotFoundScreen />
+      </Route>
 
-      </Switch>
+    </Switch>
 
-    </BrowserRouter>
   );
 };
 

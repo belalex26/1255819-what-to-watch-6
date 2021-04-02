@@ -28,7 +28,7 @@ const SingInScreen = ({onSubmit, authorizationStatus}) => {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+        <form action="#" className="sign-in__form" data-testid="sign-in_form" onSubmit={handleSubmit}>
           {authorizationStatus === AuthorizationStatus.AUTH_ERROR &&
             <div className="sign-in__message">
               <p>We can’t recognize this email <br /> and password combination. Please try again.</p>
@@ -36,16 +36,16 @@ const SingInScreen = ({onSubmit, authorizationStatus}) => {
           }
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input ref={loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" />
+              <input ref={loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" data-testid="login" />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input ref={passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" />
+              <input ref={passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" data-testid="password" />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">Sign in</button>
+            <button className="sign-in__btn" type="submit" data-testid="sign-in_btn">Sign in</button>
           </div>
         </form>
       </div>

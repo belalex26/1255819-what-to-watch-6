@@ -31,7 +31,7 @@ const FilmCard = (props) => {
     setIsPreviewPlaying(false);
   };
 
-  return <article className="small-movie-card catalog__movies-card">
+  return <article className="small-movie-card catalog__movies-card" data-testid="film-card">
     <div className="small-movie-card__image" data-id={id} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
       <VideoPlayer
         isPlaying={isPreviewPlaying}
@@ -43,17 +43,17 @@ const FilmCard = (props) => {
       </VideoPlayer>
 
     </div>
-    <h3 className="small-movie-card__title">
+    <h3 className="small-movie-card__title" data-testid="film-card-name">
       <Link className="small-movie-card__link" to={`/films/${id}`}>{name}</Link>
     </h3>
   </article>;
 };
 
 FilmCard.propTypes = {
-  "name": PropTypes.string.isRequired,
-  "posterImage": PropTypes.string.isRequired,
-  "previewVideoLink": PropTypes.string.isRequired,
-  "id": PropTypes.number.isRequired,
+  "name": PropTypes.string,
+  "posterImage": PropTypes.string,
+  "previewVideoLink": PropTypes.string,
+  "id": PropTypes.number,
   "onMouseOver": PropTypes.func
 };
 

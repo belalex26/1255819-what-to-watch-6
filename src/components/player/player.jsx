@@ -11,7 +11,7 @@ import PlayerToggler from '../player-toggler/player-toggler';
 
 import {fetchFilmById} from '../../store/api-actions';
 import {getFilm, getFilmLoadedStatus} from '../../store/selectors';
-import {format} from '../../utils';
+import {timeFormat} from '../../utils';
 
 
 const Player = (props) => {
@@ -78,7 +78,7 @@ const Player = (props) => {
 
     if (previousTime !== time) {
       setPreviousTime(time);
-      setTimeLapse(format(duration - currentTime));
+      setTimeLapse(timeFormat(duration - currentTime));
     }
     const progress = Math.round((currentTime / duration * 100) * 100) / 100;
     setTogglerProgress(progress);
@@ -116,6 +116,7 @@ const Player = (props) => {
             type="button"
             className="player__full-screen"
             onClick={handleFullScreenBtnClick}
+            data-testid="full-screen_btn"
           >
             <svg viewBox="0 0 27 27" width={27} height={27}>
               <use xlinkHref="#full-screen" />

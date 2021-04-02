@@ -9,11 +9,12 @@ const initialState = {
   isPromoLoading: false,
   isFilmLoaded: false,
   isReviewsLoaded: false,
+  isFilmsListLoading: false,
   films: [],
   film: {},
   reviews: [],
   favoriteFilms: [],
-  promo: {},
+  promo: null,
 };
 
 const dataReducer = (state = initialState, action) => {

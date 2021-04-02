@@ -39,13 +39,13 @@ const CommentForm = (props) => {
   const ratingValues = Array.from({length: RATINGS_COUNT}, (_, i) => i + 1);
 
   return (
-    <form action="#" className="add-review__form" onSubmit={handleReviewSubmit}>
+    <form action="#" className="add-review__form" onSubmit={handleReviewSubmit} data-testid="add-review_form">
       <div className="rating">
         <div className="rating__stars" onChange={setRating}>
           {
             ratingValues.map((value) => (
               <React.Fragment key={`star-${value}`}>
-                <input className="rating__input" id={`star-${value}`} type="radio" name="rating" value={value} disabled={isReviewFormDisabled}/>
+                <input className="rating__input" id={`star-${value}`} type="radio" name="rating" value={value} disabled={isReviewFormDisabled} data-testid="rating"/>
                 <label className="rating__label" htmlFor={`star-${value}`}>Rating {value}</label>
               </React.Fragment>
             ))
@@ -53,7 +53,7 @@ const CommentForm = (props) => {
         </div>
       </div>
       <div className="add-review__text">
-        <textarea disabled={isReviewFormDisabled} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={setComment} minLength={MIN_REVIEW_LENGTH} maxLength={MAX_REVIEW_LENGTH} required/>
+        <textarea disabled={isReviewFormDisabled} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={setComment} minLength={MIN_REVIEW_LENGTH} maxLength={MAX_REVIEW_LENGTH} data-testid="add-review_textarea" required/>
         <div className="add-review__submit">
           <button className="add-review__btn" type="submit" disabled={isPostDisabled || isReviewFormDisabled}>Post</button>
         </div>

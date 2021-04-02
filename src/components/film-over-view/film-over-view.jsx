@@ -7,7 +7,7 @@ const FilmOverView = (props) => {
   const {film} = props;
 
   return (
-    <div className="movie-card__text">
+    <div className="movie-card__text" data-testid="film-over-view">
       <p>{film.description}</p>
       <p className="movie-card__director"><strong>Director: {film.director}</strong></p>
       <p className="movie-card__starring"><strong>Starring: {film.starring.join(`, \n`)}</strong></p>

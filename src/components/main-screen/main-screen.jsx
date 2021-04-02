@@ -11,14 +11,14 @@ import MyListButton from '../my-list-button/my-list-button';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
 import {AuthorizationStatus} from '../../const';
 
-import {getAuthorizationStatus, getDataLoadedStatus, getFilmsListLoadingStatus, getPromo, getPromoLoadedStatus, getPromoLoadingStatus, getVisibleFilms} from '../../store/selectors';
+import {getErrorMessage, getAuthorizationStatus, getDataLoadedStatus, getFilmsListLoadingStatus, getPromo, getPromoLoadedStatus, getPromoLoadingStatus, getVisibleFilms} from '../../store/selectors';
 import {ActionCreator} from '../../store/action';
 import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
 
 import shapeOfFilm from '../../proptypes/shape-of-film';
 
 const MainScreen = (props) => {
-  const {authorizationStatus, promo, films, onLoad, isDataLoaded, isFilmsListLoading, isPromoLoaded, isPromoLoading, loadFilmsList, loadPromoFilm} = props;
+  const {authorizationStatus, promo, films, onLoad, isDataLoaded, isFilmsListLoading, isPromoLoaded, isPromoLoading, loadFilmsList, loadPromoFilm, errorMessage} = props;
 
   useEffect(() => {
     onLoad();
@@ -34,9 +34,11 @@ const MainScreen = (props) => {
   }, [isDataLoaded, isPromoLoaded, isFilmsListLoading, isPromoLoading]);
 
   if (!isDataLoaded || !isPromoLoaded) {
-    return (
-      <LoadingScreen />
-    );
+    if (!errorMessage) {
+      return (
+        <LoadingScreen />
+      );
+    }
   }
 
   return (
@@ -120,17 +122,17 @@ const MainScreen = (props) => {
 MainScreen.propTypes = {
   films: PropTypes.arrayOf(
       shapeOfFilm()
-  ).isRequired,
+  ),
   promo: shapeOfFilm(),
   authorizationStatus: PropTypes.string.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
-  isFilmsListLoading: PropTypes.bool,
+  isFilmsListLoading: PropTypes.bool.isRequired,
   isPromoLoaded: PropTypes.bool.isRequired,
   isPromoLoading: PropTypes.bool.isRequired,
   onLoad: PropTypes.func.isRequired,
   loadFilmsList: PropTypes.func.isRequired,
   loadPromoFilm: PropTypes.func.isRequired,
-
+  errorMessage: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
@@ -141,6 +143,7 @@ const mapStateToProps = (state) => ({
   isPromoLoading: getPromoLoadingStatus(state),
   promo: getPromo(state),
   films: getVisibleFilms(state),
+  errorMessage: getErrorMessage(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
