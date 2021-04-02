@@ -12,7 +12,10 @@ const mockStore = configureStore({});
 const store = {
   FILMS: {
     favoriteFilms: mockFilms,
-  }
+  },
+  VIEW: {
+    visibleFilmsCount: 8,
+  },
 };
 it(`MyList renders correctly`, () => {
   const history = createMemoryHistory();

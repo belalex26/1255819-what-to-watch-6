@@ -23,6 +23,7 @@ const store = {
   },
   VIEW: {
     activeGenre: DEFAULT_GENRE,
+    visibleFilmsCount: 8,
   },
   ERRORS: {
     errorMessage: null,
