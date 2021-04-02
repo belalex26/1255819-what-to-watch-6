@@ -29,7 +29,7 @@ const User = (props) => {
 };
 
 User.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string,
 };
 
 

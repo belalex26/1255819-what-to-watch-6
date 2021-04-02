@@ -24,7 +24,7 @@ ShowMoreBtn.propTypes = {
   allFilms: PropTypes.arrayOf(
       shapeOfFilm()
   ).isRequired,
-  visibleFilmsCount: PropTypes.number.isRequired,
+  visibleFilmsCount: PropTypes.number,
   onButtonClick: PropTypes.func.isRequired
 };
 
