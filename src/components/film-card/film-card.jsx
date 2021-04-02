@@ -50,10 +50,10 @@ const FilmCard = (props) => {
 };
 
 FilmCard.propTypes = {
-  "name": PropTypes.string.isRequired,
-  "posterImage": PropTypes.string.isRequired,
-  "previewVideoLink": PropTypes.string.isRequired,
-  "id": PropTypes.number.isRequired,
+  "name": PropTypes.string,
+  "posterImage": PropTypes.string,
+  "previewVideoLink": PropTypes.string,
+  "id": PropTypes.number,
   "onMouseOver": PropTypes.func
 };
 

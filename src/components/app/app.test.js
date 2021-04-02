@@ -173,7 +173,7 @@ describe(`Test routing`, () => {
     history.push(`/non-existent-route`);
 
     render(
-        <redux.Provider store={mockStore({})}>
+        <redux.Provider store={mockStore(store)}>
           <Router history={history}>
             <App />
           </Router>
