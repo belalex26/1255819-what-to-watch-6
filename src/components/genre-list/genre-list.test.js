@@ -1,11 +1,12 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {Router} from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import {createMemoryHistory} from 'history';
 
-import {GenresList} from './genre-list';
+import {GenreList} from './genre-list';
 import {mockFilms} from '../../test-mocks';
 import {DEFAULT_GENRE} from '../../const';
 
@@ -19,19 +20,26 @@ const store = {
   }
 };
 
-it(`GenresList renders correctly`, () => {
+it(`Click on Genre works`, () => {
   const history = createMemoryHistory();
-  const {container} = render(
+  let activeGenre = DEFAULT_GENRE;
+  const activeGenreClickHandler = jest.fn();
+  activeGenreClickHandler.mockImplementation(
+      () => (activeGenre = `Drama`)
+  );
+  render(
       <Provider store={mockStore(store)}>
         <Router history={history}>
-          <GenresList
+          <GenreList
             films={mockFilms}
             activeGenre={DEFAULT_GENRE}
-            onGenreClick={jest.fn()}
+            onGenreClick={activeGenreClickHandler}
           />
         </Router>
       </Provider>
   );
 
-  expect(container).toMatchSnapshot();
+  userEvent.click(screen.getByText(`Drama`));
+  expect(activeGenreClickHandler).toBeCalled();
+  expect(activeGenre).toBe(`Drama`);
 });

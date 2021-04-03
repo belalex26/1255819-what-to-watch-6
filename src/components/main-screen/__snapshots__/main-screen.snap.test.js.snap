@@ -197,85 +197,85 @@ exports[`MainScreen renders correctly 1`] = `
           class="small-movie-card catalog__movies-card"
           data-testid="film-card"
         >
-          <div
-            class="small-movie-card__image"
-            data-id="1"
+          <a
+            class="small-movie-card__link"
+            href="/films/1"
           >
-            <video
-              alt="The Grand Budapest Hotel"
-              height="175"
-              poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-              width="280"
-            />
-          </div>
-          <h3
-            class="small-movie-card__title"
-            data-testid="film-card-name"
-          >
-            <a
-              class="small-movie-card__link"
-              href="/films/1"
+            <div
+              class="small-movie-card__image"
+              data-id="1"
+            >
+              <video
+                alt="The Grand Budapest Hotel"
+                height="175"
+                poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
+                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                width="280"
+              />
+            </div>
+            <h3
+              class="small-movie-card__title"
+              data-testid="film-card-name"
             >
               The Grand Budapest Hotel
-            </a>
-          </h3>
+            </h3>
+          </a>
         </article>
         <article
           class="small-movie-card catalog__movies-card"
           data-testid="film-card"
         >
-          <div
-            class="small-movie-card__image"
-            data-id="2"
+          <a
+            class="small-movie-card__link"
+            href="/films/2"
           >
-            <video
-              alt="Stand By Me"
-              height="175"
-              poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-              width="280"
-            />
-          </div>
-          <h3
-            class="small-movie-card__title"
-            data-testid="film-card-name"
-          >
-            <a
-              class="small-movie-card__link"
-              href="/films/2"
+            <div
+              class="small-movie-card__image"
+              data-id="2"
+            >
+              <video
+                alt="Stand By Me"
+                height="175"
+                poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
+                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                width="280"
+              />
+            </div>
+            <h3
+              class="small-movie-card__title"
+              data-testid="film-card-name"
             >
               Stand By Me
-            </a>
-          </h3>
+            </h3>
+          </a>
         </article>
         <article
           class="small-movie-card catalog__movies-card"
           data-testid="film-card"
         >
-          <div
-            class="small-movie-card__image"
-            data-id="3"
+          <a
+            class="small-movie-card__link"
+            href="/films/3"
           >
-            <video
-              alt="Amelie"
-              height="175"
-              poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-              width="280"
-            />
-          </div>
-          <h3
-            class="small-movie-card__title"
-            data-testid="film-card-name"
-          >
-            <a
-              class="small-movie-card__link"
-              href="/films/3"
+            <div
+              class="small-movie-card__image"
+              data-id="3"
+            >
+              <video
+                alt="Amelie"
+                height="175"
+                poster="https://i.picsum.photos/id/604/248/152.jpg?hmac=Yu4rnPqlL8pPa8b7cdPSosfFApQXtQmy56BW52elqto"
+                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+                width="280"
+              />
+            </div>
+            <h3
+              class="small-movie-card__title"
+              data-testid="film-card-name"
             >
               Amelie
-            </a>
-          </h3>
+            </h3>
+          </a>
         </article>
       </div>
       <div

@@ -32,20 +32,22 @@ const FilmCard = (props) => {
   };
 
   return <article className="small-movie-card catalog__movies-card" data-testid="film-card">
-    <div className="small-movie-card__image" data-id={id} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
-      <VideoPlayer
-        isPlaying={isPreviewPlaying}
-        src={previewVideoLink}
-        posterImage={posterImage}
-        width={WIDTH}
-        height={HEIGHT}
-        alt={name}>
-      </VideoPlayer>
+    <Link className="small-movie-card__link" to={`/films/${id}`}>
+      <div className="small-movie-card__image" data-id={id} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
+        <VideoPlayer
+          isPlaying={isPreviewPlaying}
+          src={previewVideoLink}
+          posterImage={posterImage}
+          width={WIDTH}
+          height={HEIGHT}
+          alt={name}>
+        </VideoPlayer>
 
-    </div>
-    <h3 className="small-movie-card__title" data-testid="film-card-name">
-      <Link className="small-movie-card__link" to={`/films/${id}`}>{name}</Link>
-    </h3>
+      </div>
+      <h3 className="small-movie-card__title" data-testid="film-card-name">
+        {name}
+      </h3>
+    </Link>
   </article>;
 };
 

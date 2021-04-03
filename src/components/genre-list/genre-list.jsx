@@ -13,7 +13,7 @@ const getGenreList = (films) => {
   return [DEFAULT_GENRE, ...new Set(genres)].slice(0, MAX_GENRES_COUNT);
 };
 
-const GenresList = (props) => {
+const GenreList = (props) => {
   const {films, activeGenre, onGenreClick} = props;
 
   const genres = getGenreList(films);
@@ -33,7 +33,7 @@ const GenresList = (props) => {
   );
 };
 
-GenresList.propTypes = {
+GenreList.propTypes = {
   films: PropTypes.arrayOf(
       shapeOfFilm()
   ).isRequired,
@@ -53,5 +53,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {GenresList};
-export default connect(mapStateToProps, mapDispatchToProps)(GenresList);
+export {GenreList};
+export default connect(mapStateToProps, mapDispatchToProps)(GenreList);

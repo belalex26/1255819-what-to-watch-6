@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GenresList renders correctly 1`] = `
+exports[`GenreList renders correctly 1`] = `
 <div>
   <ul
     class="catalog__genres-list"

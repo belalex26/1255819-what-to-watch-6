@@ -6,7 +6,7 @@ import {render} from '@testing-library/react';
 import Review from './review';
 import {mockReviews} from '../../test-mocks';
 
-it(`Rewiew renders correctly`, () => {
+it(`Review renders correctly`, () => {
   const history = createMemoryHistory();
   const {container} = render(
       <Router history={history}>
